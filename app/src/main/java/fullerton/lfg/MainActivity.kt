@@ -17,11 +17,7 @@ class CreateAccount {
     // to create the account.
 }
 
-class CreateLookingForGroup {
+class LookingForGroup {
     // User creates a looking for group event post.
     // Information about the event is provided in this class.
-}
-
-class JoinLookingForGroup {
-    // User joins the looking for group event.
 }
