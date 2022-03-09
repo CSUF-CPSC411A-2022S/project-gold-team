@@ -10,4 +10,23 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-class EventInfo () {}
+class EventInfo () {
+
+//    Work in Progress
+    private var loc: String = "CSUF"
+    private var t: String = "12:30 PM"
+    private var description: String = "Destiny 2 Raid"
+
+    //Display Location
+    fun location(){
+        return loc
+    }
+    // Display time
+    fun time(){
+        return t
+    }
+    // Display Other
+    fun eventDescription(){
+        return description
+    }
+}
