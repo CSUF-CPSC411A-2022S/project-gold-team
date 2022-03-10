@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/login">
+
+    <fragment
+        android:id="@+id/login"
+        android:name="fullerton.lfg.Login"
+        android:label="LFG"
+        tools:layout="@layout/login" >
+        <action
+            android:id="@+id/action_login_to_signUp"
+            app:destination="@id/signUp" />
+        <action
+            android:id="@+id/action_login_to_loggedIn"
+            app:destination="@id/loggedIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp"
+        android:name="fullerton.lfg.SignUp"
+        android:label="sign_up"
+        tools:layout="@layout/sign_up" />
+    <fragment
+        android:id="@+id/loggedIn"
+        android:name="fullerton.lfg.LoggedIn"
+        android:label="logged_in"
+        tools:layout="@layout/logged_in" />
+</navigation>
