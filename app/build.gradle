@@ -2,6 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
+// Apply safeargs plugin.
+apply plugin: 'androidx.navigation.safeargs'
+// End of safeargs plugin
 
 android {
     compileSdk 32
