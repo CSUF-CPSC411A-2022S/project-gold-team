@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
-// Apply safeargs plugin. Remove comments on apply plugin only when working on 6.2 Model 2
+// Apply safeargs plugin.
 apply plugin: 'androidx.navigation.safeargs'
 // End of safeargs plugin
 
