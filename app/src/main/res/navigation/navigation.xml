@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_login_to_loggedIn"
             app:destination="@id/loggedIn" />
+        <action
+            android:id="@+id/action_login_self"
+            app:destination="@id/login" />
     </fragment>
     <fragment
         android:id="@+id/signUp"

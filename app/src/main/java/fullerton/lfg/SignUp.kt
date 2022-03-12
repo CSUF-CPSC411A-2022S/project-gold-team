@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import fullerton.lfg.databinding.SignUpBinding
 
 
 class SignUp : Fragment() {
@@ -14,6 +15,8 @@ class SignUp : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.sign_up, container, false)
+        val binding = SignUpBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 }
