@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/login"
-        android:name="fullerton.lfg.Login"
+        android:name="fullerton.lfg.ui.login.Login"
         android:label="LFG"
         tools:layout="@layout/login" >
         <action
@@ -22,12 +22,12 @@
     </fragment>
     <fragment
         android:id="@+id/signUp"
-        android:name="fullerton.lfg.SignUp"
+        android:name="fullerton.lfg.ui.signup.SignUp"
         android:label="sign_up"
         tools:layout="@layout/sign_up" />
     <fragment
         android:id="@+id/loggedIn"
-        android:name="fullerton.lfg.LoggedIn"
+        android:name="fullerton.lfg.ui.loggedin.LoggedIn"
         android:label="logged_in"
         tools:layout="@layout/logged_in" />
 </navigation>

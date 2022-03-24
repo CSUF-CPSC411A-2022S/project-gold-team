@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp">
+    tools:context=".ui.signup.SignUp">
 
     <TextView
         android:id="@+id/textView"
@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/app_name2"
@@ -33,16 +33,17 @@
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/create_email"
         android:layout_width="289dp"
         android:layout_height="48dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Enter Email"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/create_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/last_name" />
@@ -51,19 +52,22 @@
         android:id="@+id/create_password"
         android:layout_width="289dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="203dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="235dp"
         android:ems="10"
         android:hint="Enter Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_email" />
 
     <EditText
         android:id="@+id/first_name"
         android:layout_width="289dp"
         android:layout_height="48dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Enter First Name"
         android:inputType="textPersonName"
@@ -83,27 +87,27 @@
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/first_name"
-        app:layout_constraintVertical_bias="0.842" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <Button
         android:id="@+id/submit_button"
         android:layout_width="111dp"
         android:layout_height="57dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="124dp"
+        android:layout_marginBottom="80dp"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.985"
         app:layout_constraintStart_toEndOf="@+id/cancel_button"
-        app:layout_constraintTop_toBottomOf="@+id/create_password" />
+        app:layout_constraintTop_toBottomOf="@+id/confirm_password" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="254dp"
         android:layout_height="29dp"
-        android:layout_marginBottom="482dp"
+        android:layout_marginBottom="504dp"
         android:text="Create An Account"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -118,11 +122,24 @@
         android:layout_width="111dp"
         android:layout_height="57dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="124dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="80dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_password" />
+        app:layout_constraintTop_toBottomOf="@+id/confirm_password" />
+
+    <EditText
+        android:id="@+id/confirm_password"
+        android:layout_width="289dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_password"
+        app:layout_constraintVertical_bias="0.106" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

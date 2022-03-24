@@ -5,16 +5,22 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import fullerton.lfg.databinding.ActivityMainBinding
-import java.util.*
+import fullerton.lfg.ui.login.LoginViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var loginViewModel: LoginViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /**
          * use a binding object to simplify access to the visual design elements.
          */
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         /**
          * navController refers to our navigation fragment. The setupActionBarWithnavController
