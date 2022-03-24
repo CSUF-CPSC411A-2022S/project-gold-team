@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventInfo">
+
+<!--    Values are hard coded, and it also needs a visual update.-->
+
+    <TextView
+        android:id="@+id/event_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Champions League Final Watch Party" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:text="Location"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="14sp"
+        android:text=" For the third time in the tournament's history and the first since 2006, the final will be staged at the Stade de France in the Paris suburb of Saint-Denis."
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="65dp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Time"
+        android:textSize="20sp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="45dp" />
+
+    <Button
+        android:id="@+id/addEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="120dp"
+        android:text="Add Event" />
+
+</FrameLayout>
