@@ -8,5 +8,14 @@
         android:id="@+id/placeHolder"
         android:name="fullerton.lfg.PlaceHolder"
         android:label="place_holder"
-        tools:layout="@layout/place_holder" />
+        tools:layout="@layout/place_holder" >
+        <action
+            android:id="@+id/action_placeHolder_to_userInfo3"
+            app:destination="@id/userInfo" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfo"
+        android:name="fullerton.lfg.userInfo"
+        android:label="user_info"
+        tools:layout="@layout/user_info" />
 </navigation>
