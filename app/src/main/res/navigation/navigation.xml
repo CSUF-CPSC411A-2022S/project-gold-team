@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/login">
+    app:startDestination="@id/logIn">
 
     <fragment
-        android:id="@+id/login"
+        android:id="@+id/logIn"
         android:name="fullerton.lfg.ui.login.Login"
-        android:label="LFG"
+        android:label="@string/app_name"
         tools:layout="@layout/login" >
         <action
             android:id="@+id/action_login_to_signUp"
@@ -18,7 +18,7 @@
             app:destination="@id/loggedIn" />
         <action
             android:id="@+id/action_login_self"
-            app:destination="@id/login" />
+            app:destination="@id/logIn" />
     </fragment>
     <fragment
         android:id="@+id/signUp"

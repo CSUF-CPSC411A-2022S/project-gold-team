@@ -1,64 +1,148 @@
 package fullerton.lfg.ui.login
 
+
+import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import fullerton.lfg.ui.login.LoginViewModel
-import fullerton.lfg.data.TestProfile
-import fullerton.lfg.databinding.LoginBinding
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
+import android.widget.Toast
+import androidx.annotation.StringRes
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Login.newInstance] factory method to
- * create an instance of this fragment.
- */
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import fullerton.lfg.R
+
+import fullerton.lfg.databinding.LoginBinding
+import fullerton.lfg.ui.loggedin.LoggedInUserView
+
+
 class Login : Fragment() {
 
-    // Binding object instance with access to the views in the login.xml layout
-    private lateinit var binding: LoginBinding
+    private var binding: LoginBinding? = null
 
-    // Create a ViewModel the first time the fragment is created.
-    // If the fragment is re-created, it receives the same LoginViewModel instance
-    // created by the first fragment.
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate and bind the login.xml layout for the Login fragment
-        binding = LoginBinding.inflate(layoutInflater)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val loginBinding = LoginBinding.inflate(inflater, container, false)
+        binding = loginBinding
 
-        val username = binding.username
-        val password = binding.password
-        val login = binding.loginButton
-        val signup = binding.signupButton
+        return loginBinding.root
+    }
 
-        // disable login button unless both username / password is valid
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.logIn = this
 
+        val username = binding?.username
+        val password = binding?.password
+        val login = binding?.loginButton
+        val loading = binding?.loading
 
-        /**
-         * setOnClickerListener to the login_button that navigates from the
-         * Login to LoggedIn fragment
-         */
+        loginViewModel.loginFormState.observe(viewLifecycleOwner, Observer {
+            val loginState = it ?: return@Observer
 
-        login.setOnClickListener { view: View ->
-            // show the LoggedIn fragment if login is successful
-            if (username.text.toString() == TestProfile.userId && password.text.toString() == TestProfile.password) {
-                view.findNavController().navigate(fullerton.lfg.ui.login.LoginDirections.actionLoginToLoggedIn())
-            } else {
-                // show an error message of some sort if not successful
-                // and ask to the user to login again
-                view.findNavController().navigate(fullerton.lfg.ui.login.LoginDirections.actionLoginSelf())
+            // disable login button unless both username / password is valid
+            login?.isEnabled = loginState.isDataValid
 
+            if (loginState.usernameError != null) {
+                username?.error = getString(loginState.usernameError)
+            }
+            if (loginState.passwordError != null) {
+                password?.error = getString(loginState.passwordError)
+            }
+        })
+
+        loginViewModel.loginResult.observe(viewLifecycleOwner, Observer {
+            val loginResult = it ?: return@Observer
+
+            loading?.visibility = View.GONE
+            if (loginResult.error != null) {
+                showLoginFailed(loginResult.error)
+            }
+            if (loginResult.success != null) {
+                updateUiWithUser(loginResult.success)
+                onDestroyView()
             }
 
+            //Complete and destroy login activity once successful
+        })
 
+        username?.afterTextChanged {
+            loginViewModel.loginDataChanged(
+                username?.text.toString(),
+                password?.text.toString()
+            )
         }
-        return binding.root
+
+        password?.apply {
+            afterTextChanged {
+                loginViewModel.loginDataChanged(
+                    username?.text.toString(),
+                    password?.text.toString()
+                )
+            }
+
+            this?.setOnEditorActionListener { _, actionId, _ ->
+                when (actionId) {
+                    EditorInfo.IME_ACTION_DONE ->
+                        loginViewModel.login(
+                            username?.text.toString(),
+                            password?.text.toString()
+                        )
+                }
+                false
+            }
+            // login button
+            login?.setOnClickListener {
+                loading?.visibility = View.VISIBLE
+                loginViewModel.login(username?.text.toString(), password.text.toString())
+            }
+        }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
+    private fun updateUiWithUser(model: LoggedInUserView) {
+        val welcome = getString(R.string.welcome)
+        val displayName = model.displayName
+        /**
+        Toast.makeText(
+            activity,
+            "$welcome $displayName",
+            Toast.LENGTH_LONG
+        ).show()
+        **/
+        findNavController().navigate(R.id.action_login_to_loggedIn)
+    }
+
+    private fun showLoginFailed(@StringRes errorString: Int) {
+        Toast.makeText(activity, errorString, Toast.LENGTH_SHORT).show()
+    }
+}
+
+/**
+ * Extension function to simplify setting an afterTextChanged action to EditText components.
+ */
+fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(editable: Editable?) {
+            afterTextChanged.invoke(editable.toString())
+        }
+
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+    })
 }
