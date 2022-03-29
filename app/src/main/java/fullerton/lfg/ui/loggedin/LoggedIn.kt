@@ -6,7 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import fullerton.lfg.R
+import fullerton.lfg.data.TestProfile.Companion.displayName
+import fullerton.lfg.ui.loggedin.LoggedInUserView
 import fullerton.lfg.databinding.LoggedInBinding
 
 class LoggedIn : Fragment() {
@@ -32,6 +33,7 @@ class LoggedIn : Fragment() {
             loggedInviewModel = loggedInViewModel
             loggedIn = this@LoggedIn
         }
+
     }
 
     override fun onDestroyView() {

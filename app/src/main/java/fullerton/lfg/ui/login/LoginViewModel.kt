@@ -1,6 +1,5 @@
 package fullerton.lfg.ui.login
 
-import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,16 +8,12 @@ import fullerton.lfg.R
 
 
 import fullerton.lfg.data.Result
-
 import fullerton.lfg.ui.loggedin.LoggedInUserView
 
 class LoginViewModel() : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
-
-    private val _logInstate = MutableLiveData<Any>()
-    val loginState: LiveData<Any> = _logInstate
 
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
