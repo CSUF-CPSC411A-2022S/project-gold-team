@@ -8,7 +8,7 @@ import fullerton.lfg.R
 
 
 import fullerton.lfg.data.Result
-import fullerton.lfg.ui.loggedin.LoggedInUserView
+import fullerton.lfg.data.TestProfile
 
 class LoginViewModel() : ViewModel() {
 
@@ -23,7 +23,7 @@ class LoginViewModel() : ViewModel() {
 
         if (result is Result.Success) {
             _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+                LoginResult(success = TestProfile.displayName)
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)
         }

@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import fullerton.lfg.data.TestProfile.Companion.displayName
-import fullerton.lfg.ui.loggedin.LoggedInUserView
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import fullerton.lfg.R
+import fullerton.lfg.data.TestProfile
 import fullerton.lfg.databinding.LoggedInBinding
+
 
 class LoggedIn : Fragment() {
 
@@ -20,6 +23,7 @@ class LoggedIn : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val loggedInBinding = LoggedInBinding.inflate(inflater, container, false)
         binding = loggedInBinding
         return loggedInBinding.root
@@ -33,7 +37,16 @@ class LoggedIn : Fragment() {
             loggedInviewModel = loggedInViewModel
             loggedIn = this@LoggedIn
         }
+        val greet = binding?.greeting
 
+
+        greet?.text = TestProfile.displayName
+        loggedInViewModel.loggedInDisplayName.observe(viewLifecycleOwner, Observer {
+            val loggedInDisplayName = it ?: return@Observer
+
+            loggedInViewModel.loggedInUserView()
+            greet?.text = loggedInDisplayName
+        })
     }
 
     override fun onDestroyView() {

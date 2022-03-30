@@ -10,9 +10,6 @@
         <variable
             name="loggedInviewModel"
             type="fullerton.lfg.ui.loggedin.LoggedInViewModel" />
-        <variable
-            name="loggedInUserview"
-            type="fullerton.lfg.ui.loggedin.LoggedInUserView" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -4,7 +4,6 @@ package fullerton.lfg.ui.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +11,13 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
-
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import fullerton.lfg.R
-
 import fullerton.lfg.databinding.LoginBinding
-import fullerton.lfg.ui.loggedin.LoggedInUserView
+
 
 
 class Login : Fragment() {
@@ -68,7 +65,8 @@ class Login : Fragment() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
+
+                findNavController().navigate(R.id.action_login_to_loggedIn)
                 onDestroyView()
             }
 
@@ -111,19 +109,6 @@ class Login : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        /**
-        Toast.makeText(
-            activity,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
-        **/
-        findNavController().navigate(R.id.action_login_to_loggedIn)
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {

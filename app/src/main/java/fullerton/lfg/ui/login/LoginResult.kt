@@ -1,8 +1,8 @@
 package fullerton.lfg.ui.login
 
-import fullerton.lfg.ui.loggedin.LoggedInUserView
+import fullerton.lfg.data.TestProfile
 
 data class LoginResult(
-    val success: LoggedInUserView? = null,
+    val success: String? = null,
     val error: Int? = null
 )
