@@ -7,5 +7,8 @@ data class BlogPost(
     var username: String
 ) {
 
+    override fun toString(): String {
+        return "BlogPost(title='$title', image='$image', username='$username')"
+    }
 
 }

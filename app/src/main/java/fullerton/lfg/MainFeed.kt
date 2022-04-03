@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.recycler_view.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainFeed : AppCompatActivity()
@@ -32,15 +33,4 @@ class MainFeed : AppCompatActivity()
             adapter = blogRecyclerAdapter
         }
     }
-}
-
-class userRating(val Rating: Int)
-{
-    // Add code here to accept an integer from another function, and add it to another class maybe called profile
-    // profile will hold the final value of user rating, but all the math/calculation will be done here.
-}
-
-class profile
-{
-    //stores all info pertaining to a persons account.
 }

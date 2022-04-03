@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/blog_title"
-                android:text="Looking For Group"
+                android:text="The Title of a Blog"
                 android:textColor="#000"
                 android:textSize="19sp"
                 />
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/blog_author"
-                android:text="John Doe"
+                android:text="Mitch Tabian"
                 android:textSize="15sp"
                 android:layout_marginTop="10dp"
                 />
