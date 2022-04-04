@@ -6,26 +6,101 @@
     <data>
         <variable
             name="loggedIn"
-            type="fullerton.lfg.ui.loggedin.LoggedIn" />
+            type="fullerton.lfg.screens.loggedin.LoggedIn" />
         <variable
             name="loggedInviewModel"
-            type="fullerton.lfg.ui.loggedin.LoggedInViewModel" />
+            type="fullerton.lfg.screens.loggedin.LoggedInViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.loggedin.LoggedIn">
+        tools:context=".screens.loggedin.LoggedIn">
+
+        <Button
+            android:id="@+id/profile"
+            android:layout_width="180dp"
+            android:layout_height="53dp"
+            android:layout_marginBottom="156dp"
+            android:text="Profile"
+            app:backgroundTint="#05750A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/my_events"
+            android:layout_width="180dp"
+            android:layout_height="53dp"
+            android:layout_marginBottom="236dp"
+            android:text="My Events"
+            app:backgroundTint="#05750A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="205dp"
+            android:layout_height="121dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-black"
+            android:shadowColor="#FFFFFF"
+            android:text="@string/lfg"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+            android:textColor="#4CAF50"
+            android:textStyle="bold"
+            android:typeface="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/greeting"
             android:layout_width="271dp"
             android:layout_height="60dp"
-            android:text=""
+            android:hint="Welcome"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#0B0A0A"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.215" />
+            app:layout_constraintVertical_bias="0.284" />
+
+        <Button
+            android:id="@+id/create_event"
+            android:layout_width="180dp"
+            android:layout_height="53dp"
+            android:layout_marginBottom="376dp"
+            android:text="Create Events"
+            app:backgroundTint="#05750A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/browse_event"
+            android:layout_width="180dp"
+            android:layout_height="53dp"
+            android:layout_marginBottom="304dp"
+            android:text="Browse Events"
+            app:backgroundTint="#05750A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

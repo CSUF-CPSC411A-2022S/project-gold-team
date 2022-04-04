@@ -1,4 +1,4 @@
-package fullerton.lfg.ui.login
+package fullerton.lfg.screens.login
 
 
 import android.os.Bundle
@@ -14,10 +14,11 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+
 import androidx.navigation.fragment.findNavController
 import fullerton.lfg.R
-import fullerton.lfg.databinding.LoginBinding
 
+import fullerton.lfg.databinding.LoginBinding
 
 
 class Login : Fragment() {
@@ -25,10 +26,11 @@ class Login : Fragment() {
     private var binding: LoginBinding? = null
 
     private val loginViewModel: LoginViewModel by activityViewModels()
+    private lateinit var loginBinding: LoginBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val loginBinding = LoginBinding.inflate(inflater, container, false)
+        loginBinding = LoginBinding.inflate(inflater, container, false)
         binding = loginBinding
 
         return loginBinding.root
@@ -36,12 +38,14 @@ class Login : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding?.logIn = this
 
         val username = binding?.username
         val password = binding?.password
         val login = binding?.loginButton
         val loading = binding?.loading
+        val signup = binding?.signupButton
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner, Observer {
             val loginState = it ?: return@Observer
@@ -65,12 +69,11 @@ class Login : Fragment() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
-
-                findNavController().navigate(R.id.action_login_to_loggedIn)
+                val loggedin = loginResult.success.displayName
+                val action = LoginDirections.actionLoginToLoggedIn(loggedin)
+                findNavController().navigate(action)
                 onDestroyView()
             }
-
-            //Complete and destroy login activity once successful
         })
 
         username?.afterTextChanged {
@@ -102,6 +105,10 @@ class Login : Fragment() {
             login?.setOnClickListener {
                 loading?.visibility = View.VISIBLE
                 loginViewModel.login(username?.text.toString(), password.text.toString())
+            }
+
+            signup?.setOnClickListener{
+                findNavController().navigate(R.id.action_login_to_signUp)
             }
         }
     }

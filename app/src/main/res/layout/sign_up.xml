@@ -6,19 +6,19 @@
     <data>
         <variable
             name="signUp"
-            type="fullerton.lfg.ui.signup.SignUp" />
+            type="fullerton.lfg.screens.signup.SignUp" />
         <variable
             name="signUpviewModel"
-            type="fullerton.lfg.ui.signup.SignUpViewModel" />
+            type="fullerton.lfg.screens.signup.SignUpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.signup.SignUp">
+        tools:context=".screens.signup.SignUp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/signupTextView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,9 +30,8 @@
 
         <TextView
             android:id="@+id/app_name2"
-            android:layout_width="205dp"
-            android:layout_height="121dp"
-            android:layout_marginTop="60dp"
+            android:layout_width="257dp"
+            android:layout_height="126dp"
             android:fontFamily="sans-serif-black"
             android:shadowColor="#FFFFFF"
             android:text="LFG"
@@ -41,50 +40,62 @@
             android:textColor="#4CAF50"
             android:textStyle="bold"
             android:typeface="normal"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintBottom_toTopOf="@+id/create_account_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/create_email"
             android:layout_width="289dp"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="303dp"
             android:ems="10"
             android:hint="Enter Email"
             android:inputType="textEmailAddress"
+            android:imeOptions="actionSend"
+            android:selectAllOnFocus="true"
+            app:layout_constraintBottom_toBottomOf="@+id/signupTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/last_name" />
+            app:layout_constraintTop_toBottomOf="@+id/last_name"
+            android:nextFocusForward="@+id/create_password"/>
 
         <EditText
             android:id="@+id/create_password"
             android:layout_width="289dp"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="235dp"
+            android:layout_marginBottom="234dp"
             android:ems="10"
             android:hint="Enter Password"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            android:inputType="textPassword" tabindex="3"
+            android:imeOptions="actionSend"
+            android:selectAllOnFocus="true"
+            app:layout_constraintBottom_toBottomOf="@+id/signupTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/create_email" />
+            app:layout_constraintTop_toBottomOf="@+id/create_email"
+            android:nextFocusForward="@+id/confirm_password"/>
 
         <EditText
             android:id="@+id/first_name"
             android:layout_width="289dp"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="435dp"
             android:ems="10"
             android:hint="Enter First Name"
             android:inputType="textPersonName"
+            android:imeOptions="actionSend"
+            android:selectAllOnFocus="true"
+            app:layout_constraintBottom_toBottomOf="@+id/signupTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/create_account_text"
+            android:nextFocusForward="@+id/last_name"/>
 
         <EditText
             android:id="@+id/last_name"
@@ -93,12 +104,16 @@
             android:layout_marginBottom="339dp"
             android:ems="10"
             android:hint="Enter Last Name"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
+            android:inputType="textPersonName" tabindex="2"
+            android:imeOptions="actionSend"
+            android:selectAllOnFocus="true"
+            app:layout_constraintBottom_toBottomOf="@+id/signupTextView"
+            app:layout_constraintEnd_toEndOf="@+id/signupTextView"
+            app:layout_constraintStart_toStartOf="@+id/signupTextView"
             app:layout_constraintTop_toBottomOf="@+id/first_name"
-            app:layout_constraintVertical_bias="0.333" />
+            app:layout_constraintVertical_bias="0.333"
+            android:nextFocusForward="@+id/create_email"/>
+
 
         <Button
             android:id="@+id/submit_button"
@@ -115,7 +130,7 @@
             app:layout_constraintTop_toBottomOf="@+id/confirm_password" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/create_account_text"
             android:layout_width="254dp"
             android:layout_height="29dp"
             android:layout_marginBottom="504dp"
@@ -123,22 +138,24 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="@+id/signupTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/cancel_button"
             android:layout_width="111dp"
             android:layout_height="57dp"
-            android:layout_marginStart="60dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="80dp"
             android:text="Cancel"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.203"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/confirm_password" />
+            app:layout_constraintTop_toBottomOf="@+id/confirm_password"
+            app:layout_constraintVertical_bias="0.0"
+            android:nextFocusForward="@+id/submit_button"/>
 
         <EditText
             android:id="@+id/confirm_password"
@@ -146,12 +163,26 @@
             android:layout_height="48dp"
             android:ems="10"
             android:hint="Confirm Password"
-            android:inputType="textPassword"
+            android:inputType="textPassword" tabindex="4"
+            android:imeOptions="actionSend"
+            android:selectAllOnFocus="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/create_password"
-            app:layout_constraintVertical_bias="0.106" />
+            app:layout_constraintVertical_bias="0.106"
+            android:nextFocusForward="@+id/cancel_button"/>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/signupTextView"
+            app:layout_constraintEnd_toEndOf="@+id/confirm_password"
+            app:layout_constraintStart_toStartOf="@+id/confirm_password"
+            app:layout_constraintTop_toTopOf="@+id/signupTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

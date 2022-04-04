@@ -1,4 +1,4 @@
-package fullerton.lfg.ui.login
+package fullerton.lfg.screens.login
 
 data class LoginFormState(
     val usernameError: Int? = null,

@@ -1,14 +1,13 @@
-package fullerton.lfg.ui.login
+package fullerton.lfg.screens.login
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import fullerton.lfg.R
-
-
+import fullerton.lfg.data.LoginRepo
 import fullerton.lfg.data.Result
-import fullerton.lfg.data.TestProfile
+import fullerton.lfg.data.model.LoggedInUserView
 
 class LoginViewModel() : ViewModel() {
 
@@ -19,11 +18,13 @@ class LoginViewModel() : ViewModel() {
     val loginResult: LiveData<LoginResult> = _loginResult
 
     fun login(username: String, password: String) {
+        // can be launched in a separate asynchronous job
         val result = LoginRepo().login(username, password)
 
         if (result is Result.Success) {
             _loginResult.value =
-                LoginResult(success = TestProfile.displayName)
+                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)
         }

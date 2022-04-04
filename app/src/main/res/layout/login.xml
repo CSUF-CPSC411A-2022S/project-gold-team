@@ -6,13 +6,13 @@
     <data>
         <variable
             name="logIn"
-            type="fullerton.lfg.ui.login.Login" />
+            type="fullerton.lfg.screens.login.Login" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.login.Login">
+        tools:context=".screens.login.Login">
 
         <EditText
             android:id="@+id/username"
@@ -22,7 +22,6 @@
             android:hint="Email"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/app_name"
@@ -37,7 +36,6 @@
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +66,6 @@
             android:layout_height="53dp"
             android:layout_marginTop="60dp"
             android:text="login"
-            android:selectAllOnFocus="true"
             app:backgroundTint="#05750A"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
