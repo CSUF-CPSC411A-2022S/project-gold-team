@@ -3,19 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/placeHolder">
+    app:startDestination="@id/logIn">
+
     <fragment
-        android:id="@+id/placeHolder"
-        android:name="fullerton.lfg.PlaceHolder"
-        android:label="place_holder"
-        tools:layout="@layout/place_holder" >
+        android:id="@+id/logIn"
+        android:name="fullerton.lfg.screens.login.Login"
+        android:label="@string/app_name"
+        tools:layout="@layout/login" >
         <action
-            android:id="@+id/action_placeHolder_to_userInfo3"
-            app:destination="@id/userInfo" />
+            android:id="@+id/action_login_to_signUp"
+            app:destination="@id/signUp" />
+        <action
+            android:id="@+id/action_login_to_loggedIn"
+            app:destination="@id/loggedIn" />
+        <action
+            android:id="@+id/action_login_self"
+            app:destination="@id/logIn" />
+        <argument android:name="loggedin" />
     </fragment>
     <fragment
-        android:id="@+id/userInfo"
-        android:name="fullerton.lfg.userInfo"
-        android:label="user_info"
-        tools:layout="@layout/user_info" />
+        android:id="@+id/signUp"
+        android:name="fullerton.lfg.screens.signup.SignUp"
+        android:label="sign_up"
+        tools:layout="@layout/sign_up" >
+        <action
+            android:id="@+id/action_signUp_to_loggedIn"
+            app:destination="@id/loggedIn" />
+        <action
+            android:id="@+id/action_signUp_to_logIn"
+            app:destination="@id/logIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/loggedIn"
+        android:name="fullerton.lfg.screens.loggedin.LoggedIn"
+        android:label="logged_in"
+        tools:layout="@layout/logged_in" >
+        <argument android:name="loggedin" />
+    </fragment>
 </navigation>
