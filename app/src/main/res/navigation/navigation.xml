@@ -39,5 +39,13 @@
         android:label="logged_in"
         tools:layout="@layout/logged_in" >
         <argument android:name="loggedin" />
+        <action
+            android:id="@+id/action_loggedIn_to_mainFeed"
+            app:destination="@id/mainFeed" />
     </fragment>
+    <fragment
+        android:id="@+id/mainFeed"
+        android:name="fullerton.lfg.MainFeed"
+        android:label="fragment_main_feed"
+        tools:layout="@layout/fragment_main_feed" />
 </navigation>
