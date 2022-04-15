@@ -17,6 +17,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import fullerton.lfg.R
+import fullerton.lfg.data.model.LoggedInUserView
 import fullerton.lfg.databinding.SignUpBinding
 
 
@@ -91,11 +92,9 @@ class SignUp : Fragment() {
                 showSignupFailed(signupResult.error)
             }
             if (signupResult.success != null) {
-                val loggedin = signupResult.success.displayName
-                val action = SignUpDirections.actionSignUpToLoggedIn(loggedin)
-                findNavController().navigate(action)
-                onDestroyView()
+                updateUiWithUser(signupResult.success)
             }
+
         })
 
         firstName?.afterTextChanged {
@@ -173,11 +172,20 @@ class SignUp : Fragment() {
             loading?.visibility = View.VISIBLE
             signUpViewModel.createUser(firstName?.text.toString(),lastName?.text.toString(),email?.text.toString(),password?.text.toString(),
                 confirmPassword?.text.toString())
+
         }
 
         cancel?.setOnClickListener {
             findNavController().navigate(R.id.action_signUp_to_logIn)
         }
+
+    }
+
+    private fun updateUiWithUser(model: LoggedInUserView) {
+
+        val displayName = model.displayName
+        val action = SignUpDirections.actionSignUpToLoggedIn(displayName)
+        findNavController().navigate(action)
 
     }
 

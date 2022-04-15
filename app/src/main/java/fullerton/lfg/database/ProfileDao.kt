@@ -23,13 +23,13 @@ interface ProfileDao {
     // its intersection id. We don't use suspend because LiveData objects are already designed
     // to work asynchronous.
     @Query("SELECT * from profile_table WHERE profileId = :key")
-    fun get(key: Long): LiveData<Profile>?
+    fun get(key: Long): Flow<Profile>?
 
     // Custom query for retrieving all Intersection entities from a table in the database.
     // Data is stored to a List LiveData. We don't use suspend because LiveData objects
     // are already designed to work asynchronously.
     @Query("SELECT * from profile_table ORDER BY profileId DESC")
-    fun getAllProfiles(): LiveData<List<Profile>>
+    fun getAllProfiles(): Flow<List<Profile>>
 
     // Custom query for deleting all entities on a table in the database
     // We use suspend to run the function asynchronously (coroutine).

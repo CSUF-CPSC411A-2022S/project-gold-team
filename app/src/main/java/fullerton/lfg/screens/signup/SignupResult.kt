@@ -4,6 +4,6 @@ import fullerton.lfg.data.model.LoggedInUserView
 import fullerton.lfg.data.model.User
 
 data class SignupResult(
-    val success: User = null,
+    val success: LoggedInUserView? = null,
     val error: Int? = null
 )
