@@ -1,5 +1,6 @@
 package fullerton.lfg.screens.signup
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 
@@ -15,9 +16,11 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import fullerton.lfg.R
 import fullerton.lfg.data.model.LoggedInUserView
+import fullerton.lfg.database.ProfileDatabase
 import fullerton.lfg.databinding.SignUpBinding
 
 
@@ -26,7 +29,7 @@ class SignUp : Fragment() {
 
     private var binding: SignUpBinding? = null
 
-    private val signUpViewModel: SignUpViewModel by activityViewModels()
+    //private val signUpViewModel: SignUpViewModel by activityViewModels()
     private lateinit var signUpBinding: SignUpBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +44,12 @@ class SignUp : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val application = requireNotNull(this.activity).application
+        val dataSource = ProfileDatabase.getInstance(application).profileDao
+
+        val viewModelFactory = SignUpViewModelFactory(dataSource, application)
+
+        val signUpViewModel = ViewModelProvider(this, viewModelFactory).get(SignUpViewModel::class.java)
         binding?.apply {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
@@ -172,19 +181,25 @@ class SignUp : Fragment() {
             loading?.visibility = View.VISIBLE
             signUpViewModel.createUser(firstName?.text.toString(),lastName?.text.toString(),email?.text.toString(),password?.text.toString(),
                 confirmPassword?.text.toString())
+            //findNavController().navigate(R.id.action_signUp_to_loggedIn)
 
         }
 
         cancel?.setOnClickListener {
-            findNavController().navigate(R.id.action_signUp_to_logIn)
+            //findNavController().navigate(R.id.action_signUp_to_logIn)
         }
 
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
-
-        val displayName = model.displayName
-        val action = SignUpDirections.actionSignUpToLoggedIn(displayName)
+    private fun updateUiWithUser(model: LoggedInUserView?) {
+        val welcome = getString(R.string.welcome)
+        val displayName = model?.displayName.toString()
+        Toast.makeText(
+            requireContext(),
+            "$welcome $displayName",
+            Toast.LENGTH_LONG
+        ).show()
+        val action = SignUpDirections.actionSignUpToLoggedIn(displayName.toString())
         findNavController().navigate(action)
 
     }

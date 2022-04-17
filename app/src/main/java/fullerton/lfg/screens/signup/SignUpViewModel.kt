@@ -1,20 +1,26 @@
 package fullerton.lfg.screens.signup
 
+import android.app.Application
 import android.util.Patterns
+import androidx.databinding.Observable
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
 import fullerton.lfg.R
-import fullerton.lfg.data.Result
-import fullerton.lfg.data.UserInfo
 import fullerton.lfg.data.model.LoggedInUser
 import fullerton.lfg.data.model.LoggedInUserView
-import fullerton.lfg.data.model.User
-import java.io.IOException
+import fullerton.lfg.database.Profile
+import fullerton.lfg.database.ProfileDao
+import kotlinx.coroutines.launch
 
 
-class SignUpViewModel(): ViewModel() {
+class SignUpViewModel(
+    val database: ProfileDao,
+    application: Application
+): AndroidViewModel(application) {
 
 
-    //val allProfiles: LiveData<List<Profile>> = repo.allProfiles.asLiveData()
+    val profileList = database.getAllProfiles()
+
 
     private val _signupForm = MutableLiveData<SignUpFormState>()
     val signupFormState: LiveData<SignUpFormState> = _signupForm
@@ -22,65 +28,65 @@ class SignUpViewModel(): ViewModel() {
     private val _signupResult = MutableLiveData<SignupResult>()
     val signupResult: LiveData<SignupResult> = _signupResult
 
+    private val _firstName = MutableLiveData("")
+    val firstName: LiveData<String> = _firstName
+    private val _lastName = MutableLiveData("")
+    val lastName: LiveData<String> = _lastName
+    private val _userName = MutableLiveData("")
+    val userName: LiveData<String> = _userName
+    private val _password = MutableLiveData("")
+    val password: LiveData<String> = _password
 
 
-    fun createUser(firstName: String, lastName: String, username: String,
+    fun createUser(firstname: String, lastname: String, username: String,
                    password: String, confirmPassword: String) {
         // can be launched in a separate asynchronous job
-        val result = checkResult(firstName,lastName,username,password)
+        val result = checkResult(firstname,lastname,username,password)
 
-        if (result is Result.Success) {
+        if (result == false) {
             _signupResult.value =
-                SignupResult(success = LoggedInUserView(displayName = result.data.displayName))
+                SignupResult(success = LoggedInUserView(displayName = firstname))
+
 
         } else {
             _signupResult.value = SignupResult(error = R.string.signup_failed)
         }
     }
 
-    private fun checkIfUserExists(firstName: String, lastName: String, username: String,
-                                  password: String): Result<LoggedInUser>{
-        val userInfo = UserInfo.dataSet()
-        return try {
-            lateinit var loggedInUser: LoggedInUser
-            for (user in userInfo) {
-                if (username != user.userId && username.isNotBlank()) {
+    private fun checkIfUserExists(
+        firstname: String, lastname: String, username: String,
+        password: String
+    ): Boolean {
 
-                    userInfo.add(
-                        User(
-                            firstName = firstName,
-                            lastName = lastName,
-                            userId = username,
-                            password = password,
-                            displayName = firstName
-                        )
-
-
-                    )
-
-                    loggedInUser = LoggedInUser(
-                        userId = username,
-                        displayName = firstName
-                    )
-                }
-            }
-            val createdUser = loggedInUser
-            Result.Success(createdUser)
-        } catch (e: Throwable) {
-            Result.Error(IOException("This email already exists", e))
-        }
+        return database.isProfileExist(username)
     }
 
-    private fun checkResult(firstName: String, lastName: String, username: String,
-                            password: String): Result<LoggedInUser> {
-        val result = checkIfUserExists(firstName,lastName,username
+    private fun checkResult(firstname: String, lastname: String, username: String,
+                            password: String): Boolean {
+        val result = checkIfUserExists(firstname,lastname,username
             , password)
 
-        if (result is Result.Success) {
-            setLoggedInUser(result.data)
+        if (result == false) {
+            setLoggedInUser(LoggedInUser(userId = username, displayName = firstname))
+            _firstName.value = firstname
+            _lastName.value = lastname
+            _userName.value = username
+            _password.value = password
+            insert()
         }
-
         return result
+    }
+
+    private fun insert() {
+        viewModelScope.launch {
+            var profile = Profile()
+            profile.firstname = firstName.value.toString()
+            profile.lastname = lastName.value.toString()
+            profile.username = userName.value.toString()
+            profile.password = password.value.toString()
+
+            database.insert(profile)
+        }
     }
 
     fun signupDataChanged(firstName: String, lastName: String, username: String,
@@ -141,18 +147,8 @@ class SignUpViewModel(): ViewModel() {
 
     }
 
-    private fun setLoggedInUser(loggedInUser: LoggedInUser) {
+    private fun setLoggedInUser(loggedInUser: LoggedInUser?) {
         this.user = loggedInUser
         // If user credentials will be cached in local storage, it is recommended it be encrypted
     }
 }
-
-//class SignUpViewModelFactory(private val repo: ProfileRepo) : ViewModelProvider.Factory {
-    //override fun <T : ViewModel> create(modelClass: Class<T>): T {
-       // if (modelClass.isAssignableFrom(SignUpViewModel::class.java)) {
-           // @Suppress("UNCHECKED_CAST")
-            //return SignUpViewModel(repo) as T
-        //}
-        //throw IllegalArgumentException("Unknown ViewModel class")
-    //}
-//}
