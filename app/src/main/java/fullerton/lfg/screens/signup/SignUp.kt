@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import fullerton.lfg.ProfileRepo
 import fullerton.lfg.R
 import fullerton.lfg.data.model.LoggedInUserView
 import fullerton.lfg.database.ProfileDatabase
@@ -29,7 +31,7 @@ class SignUp : Fragment() {
 
     private var binding: SignUpBinding? = null
 
-    //private val signUpViewModel: SignUpViewModel by activityViewModels()
+    private lateinit var signUpViewModel: SignUpViewModel
     private lateinit var signUpBinding: SignUpBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,11 +47,14 @@ class SignUp : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val application = requireNotNull(this.activity).application
-        val dataSource = ProfileDatabase.getInstance(application).profileDao
+        val profileDao = ProfileDatabase.getInstance(application).profileDao
 
-        val viewModelFactory = SignUpViewModelFactory(dataSource, application)
+        val repo = ProfileRepo(profileDao)
 
-        val signUpViewModel = ViewModelProvider(this, viewModelFactory).get(SignUpViewModel::class.java)
+        val viewModelFactory = SignUpViewModelFactory(repo, application)
+
+        signUpViewModel = ViewModelProvider(this, viewModelFactory).get(SignUpViewModel::class.java)
+
         binding?.apply {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
@@ -76,6 +81,7 @@ class SignUp : Fragment() {
 
             // disable submit button unless all is valid
             submit?.isEnabled = signupState.isDataValid
+
             if (signupState.firstNameError != null) {
                 firstName?.error = getString(signupState.firstNameError)
             }
@@ -99,11 +105,17 @@ class SignUp : Fragment() {
             loading?.visibility = View.GONE
             if (signupResult.error != null) {
                 showSignupFailed(signupResult.error)
+                Log.i("Testing", "Inside SignupResult.error")
             }
             if (signupResult.success != null) {
                 updateUiWithUser(signupResult.success)
+                Log.i("Testing", "Inside SignupResult.success")
             }
 
+        })
+
+        signUpViewModel.userDetails.observe(viewLifecycleOwner, Observer {
+            val userDetails = it ?: return@Observer
         })
 
         firstName?.afterTextChanged {
@@ -178,9 +190,11 @@ class SignUp : Fragment() {
 
 
         submit?.setOnClickListener {
+            Log.i("Testing", "Inside Submit Button")
             loading?.visibility = View.VISIBLE
             signUpViewModel.createUser(firstName?.text.toString(),lastName?.text.toString(),email?.text.toString(),password?.text.toString(),
                 confirmPassword?.text.toString())
+            Log.i("Testing", "Inside Submit Button")
             //findNavController().navigate(R.id.action_signUp_to_loggedIn)
 
         }
@@ -199,8 +213,8 @@ class SignUp : Fragment() {
             "$welcome $displayName",
             Toast.LENGTH_LONG
         ).show()
-        val action = SignUpDirections.actionSignUpToLoggedIn(displayName.toString())
-        findNavController().navigate(action)
+        //val action = SignUpDirections.actionSignUpToLoggedIn()
+        //findNavController().navigate(action)
 
     }
 

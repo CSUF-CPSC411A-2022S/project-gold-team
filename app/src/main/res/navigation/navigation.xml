@@ -10,16 +10,6 @@
         android:name="fullerton.lfg.screens.signup.SignUp"
         android:label="sign_up"
         tools:layout="@layout/sign_up" >
-        <action
-            android:id="@+id/action_signUp_to_loggedIn"
-            app:destination="@id/loggedIn" />
         <argument android:name="signup" />
-    </fragment>
-    <fragment
-        android:id="@+id/loggedIn"
-        android:name="fullerton.lfg.screens.loggedin.LoggedIn"
-        android:label="logged_in"
-        tools:layout="@layout/logged_in" >
-        <argument android:name="loggedin" />
     </fragment>
 </navigation>

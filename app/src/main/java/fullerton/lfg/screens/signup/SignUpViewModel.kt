@@ -1,25 +1,33 @@
 package fullerton.lfg.screens.signup
 
+
 import android.app.Application
 import android.util.Patterns
-import androidx.databinding.Observable
-import androidx.fragment.app.FragmentActivity
+
 import androidx.lifecycle.*
+import fullerton.lfg.ProfileRepo
 import fullerton.lfg.R
 import fullerton.lfg.data.model.LoggedInUser
 import fullerton.lfg.data.model.LoggedInUserView
 import fullerton.lfg.database.Profile
-import fullerton.lfg.database.ProfileDao
+import android.util.Log
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 
 class SignUpViewModel(
-    val database: ProfileDao,
+    private val repo: ProfileRepo,
     application: Application
 ): AndroidViewModel(application) {
 
 
-    val profileList = database.getAllProfiles()
+    init {
+        Log.i("Testing", "init")
+    }
+
+    val allProfiles: LiveData<List<Profile>> = repo.allProfiles
+    private val _userDetails = MutableLiveData<Profile>()
+    val userDetails: LiveData<Profile> = _userDetails
 
 
     private val _signupForm = MutableLiveData<SignUpFormState>()
@@ -38,54 +46,45 @@ class SignUpViewModel(
     val password: LiveData<String> = _password
 
 
+
     fun createUser(firstname: String, lastname: String, username: String,
                    password: String, confirmPassword: String) {
         // can be launched in a separate asynchronous job
-        val result = checkResult(firstname,lastname,username,password)
+        Log.i("Testing", "Inside createUser function")
+        val result = checkIfUserExists(username)
+        Log.i("Testing", result?.value?.username + " <- result in createUser")
 
-        if (result == false) {
+        if (result?.value?.username == null) {
             _signupResult.value =
                 SignupResult(success = LoggedInUserView(displayName = firstname))
 
+            Log.i("Testing", "Inside result == null")
+            createProfile(firstname, lastname, username, password)
 
-        } else {
+        } else if (result?.value?.username != null) {
             _signupResult.value = SignupResult(error = R.string.signup_failed)
+            Log.i("Testing", "Inside result == else")
         }
     }
 
-    private fun checkIfUserExists(
-        firstname: String, lastname: String, username: String,
-        password: String
-    ): Boolean {
-
-        return database.isProfileExist(username)
+    private fun checkIfUserExists(username: String): LiveData<Profile>? {
+        Log.i("Testing", "Inside checkIfUserExists function")
+        return repo.checkIfUserExists(username)
     }
 
-    private fun checkResult(firstname: String, lastname: String, username: String,
-                            password: String): Boolean {
-        val result = checkIfUserExists(firstname,lastname,username
-            , password)
-
-        if (result == false) {
-            setLoggedInUser(LoggedInUser(userId = username, displayName = firstname))
-            _firstName.value = firstname
-            _lastName.value = lastname
-            _userName.value = username
-            _password.value = password
-            insert()
-        }
-        return result
-    }
-
-    private fun insert() {
+    private fun createProfile(firstname: String, lastname: String, username: String,
+                            password: String){
+        Log.i("Testing", "Inside createProfile function")
+        var profile = Profile()
+        Log.i("Testing", "username: " + username)
         viewModelScope.launch {
-            var profile = Profile()
-            profile.firstname = firstName.value.toString()
-            profile.lastname = lastName.value.toString()
-            profile.username = userName.value.toString()
-            profile.password = password.value.toString()
 
-            database.insert(profile)
+            profile.firstname = firstname
+            profile.lastname = lastname
+            profile.username= username
+            profile.password = password
+            Log.i("Testing", "username: " + profile.username)
+            repo.insert(profile)
         }
     }
 
@@ -130,25 +129,17 @@ class SignUpViewModel(
     private fun isConfirmPasswordValid(password: String, confirmPassword: String): Boolean {
         return confirmPassword.length > 5 && password == confirmPassword
     }
-    // in-memory cache of the loggedInUser object
-    var user: LoggedInUser? = null
-        private set
+}
 
-    val isLoggedIn: Boolean
-        get() = user != null
-
-    init {
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        user = null
-    }
-
-    fun logout() {
-        user = null
-
-    }
-
-    private fun setLoggedInUser(loggedInUser: LoggedInUser?) {
-        this.user = loggedInUser
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
+class SignUpViewModelFactory(
+    private val repo: ProfileRepo,
+    private val application: Application
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(SignUpViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return SignUpViewModel(repo,application) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
