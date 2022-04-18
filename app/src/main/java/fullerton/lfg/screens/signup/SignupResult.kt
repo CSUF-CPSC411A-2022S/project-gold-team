@@ -1,9 +1,8 @@
 package fullerton.lfg.screens.signup
 
-import fullerton.lfg.data.model.LoggedInUserView
-import fullerton.lfg.data.model.User
+import fullerton.lfg.database.Profile
 
 data class SignupResult(
-    val success: LoggedInUserView? = null,
+    val success: Profile? = null,
     val error: Int? = null
 )

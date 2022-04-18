@@ -70,7 +70,7 @@
             android:layout_marginBottom="234dp"
             android:ems="10"
             android:hint="Enter Password"
-            android:inputType="textPassword" tabindex="3"
+            android:inputType="textPassword"
             android:imeOptions="actionSend"
             android:selectAllOnFocus="true"
             app:layout_constraintBottom_toBottomOf="@+id/signupTextView"
@@ -88,7 +88,7 @@
             android:layout_marginBottom="435dp"
             android:ems="10"
             android:hint="Enter First Name"
-            android:inputType="textPersonName" tabindex="1"
+            android:inputType="textPersonName"
             android:imeOptions="actionSend"
             android:selectAllOnFocus="true"
             app:layout_constraintBottom_toBottomOf="@+id/signupTextView"
@@ -104,7 +104,7 @@
             android:layout_marginBottom="339dp"
             android:ems="10"
             android:hint="Enter Last Name"
-            android:inputType="textPersonName" tabindex="2"
+            android:inputType="textPersonName"
             android:imeOptions="actionSend"
             android:selectAllOnFocus="true"
             app:layout_constraintBottom_toBottomOf="@+id/signupTextView"
@@ -128,7 +128,6 @@
             app:layout_constraintHorizontal_bias="0.985"
             app:layout_constraintStart_toEndOf="@+id/cancel_button"
             app:layout_constraintTop_toBottomOf="@+id/confirm_password"
-
             />
 
         <TextView
@@ -165,7 +164,7 @@
             android:layout_height="48dp"
             android:ems="10"
             android:hint="Confirm Password"
-            android:inputType="textPassword" tabindex="4"
+            android:inputType="textPassword"
             android:imeOptions="actionSend"
             android:selectAllOnFocus="true"
             app:layout_constraintBottom_toBottomOf="parent"

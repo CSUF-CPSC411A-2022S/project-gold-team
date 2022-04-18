@@ -1,11 +1,7 @@
 package fullerton.lfg.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
-import kotlinx.coroutines.flow.Flow
+import androidx.room.*
 
 @Dao
 interface ProfileDao {
@@ -25,7 +21,7 @@ interface ProfileDao {
     //@Query("SELECT * from profile_table WHERE user_name = :key")
     //fun get(key: String): LiveData<Profile>?
 
-    @Query("SELECT * from profile_table WHERE user_name = :username")
+    @Query("SELECT * from profile_table WHERE user_name LIKE :username")
     fun getProfile(username: String): LiveData<Profile>?
 
     // Custom query for retrieving all Intersection entities from a table in the database.

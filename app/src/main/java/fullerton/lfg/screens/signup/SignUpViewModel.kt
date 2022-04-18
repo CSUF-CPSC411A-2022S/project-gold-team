@@ -7,11 +7,10 @@ import android.util.Patterns
 import androidx.lifecycle.*
 import fullerton.lfg.ProfileRepo
 import fullerton.lfg.R
-import fullerton.lfg.data.model.LoggedInUser
-import fullerton.lfg.data.model.LoggedInUserView
+
 import fullerton.lfg.database.Profile
 import android.util.Log
-import kotlinx.coroutines.flow.Flow
+
 import kotlinx.coroutines.launch
 
 
@@ -25,26 +24,12 @@ class SignUpViewModel(
         Log.i("Testing", "init")
     }
 
-    val allProfiles: LiveData<List<Profile>> = repo.allProfiles
-    private val _userDetails = MutableLiveData<Profile>()
-    val userDetails: LiveData<Profile> = _userDetails
-
 
     private val _signupForm = MutableLiveData<SignUpFormState>()
     val signupFormState: LiveData<SignUpFormState> = _signupForm
 
     private val _signupResult = MutableLiveData<SignupResult>()
     val signupResult: LiveData<SignupResult> = _signupResult
-
-    private val _firstName = MutableLiveData("")
-    val firstName: LiveData<String> = _firstName
-    private val _lastName = MutableLiveData("")
-    val lastName: LiveData<String> = _lastName
-    private val _userName = MutableLiveData("")
-    val userName: LiveData<String> = _userName
-    private val _password = MutableLiveData("")
-    val password: LiveData<String> = _password
-
 
 
     fun createUser(firstname: String, lastname: String, username: String,
@@ -55,13 +40,12 @@ class SignUpViewModel(
         Log.i("Testing", result?.value?.username + " <- result in createUser")
 
         if (result?.value?.username == null) {
-            _signupResult.value =
-                SignupResult(success = LoggedInUserView(displayName = firstname))
-
             Log.i("Testing", "Inside result == null")
-            createProfile(firstname, lastname, username, password)
+            _signupResult.value =
+                SignupResult(success = Profile(profileId = 0, firstname = firstname, lastname = lastname,
+                    username = username, password = password))
 
-        } else if (result?.value?.username != null) {
+        } else if (result.value?.username != null) {
             _signupResult.value = SignupResult(error = R.string.signup_failed)
             Log.i("Testing", "Inside result == else")
         }
@@ -72,13 +56,13 @@ class SignUpViewModel(
         return repo.checkIfUserExists(username)
     }
 
-    private fun createProfile(firstname: String, lastname: String, username: String,
+    fun createProfile(firstname: String, lastname: String, username: String,
                             password: String){
         Log.i("Testing", "Inside createProfile function")
-        var profile = Profile()
-        Log.i("Testing", "username: " + username)
-        viewModelScope.launch {
 
+        Log.i("Testing", "username: $username")
+        viewModelScope.launch{
+            val profile = Profile()
             profile.firstname = firstname
             profile.lastname = lastname
             profile.username= username
@@ -106,11 +90,11 @@ class SignUpViewModel(
     }
 
     private fun isFirstNameValid(firstName: String): Boolean {
-        return firstName.length > 0 && firstName != " "
+        return firstName.isNotEmpty() && firstName != " "
 
     }
     private fun isLastNameValid(lastName: String): Boolean {
-        return lastName.length > 0 && lastName != " "
+        return lastName.isNotEmpty() && lastName != " "
 
     }
     // A placeholder username validation check
@@ -131,15 +115,3 @@ class SignUpViewModel(
     }
 }
 
-class SignUpViewModelFactory(
-    private val repo: ProfileRepo,
-    private val application: Application
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(SignUpViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return SignUpViewModel(repo,application) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}

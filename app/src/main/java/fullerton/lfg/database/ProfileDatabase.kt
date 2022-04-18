@@ -2,12 +2,10 @@ package fullerton.lfg.database
 
 import android.content.Context
 import androidx.room.Database
-
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-
-@Database(entities = [Profile::class], version = 1, exportSchema = false)
+@Database(entities = [Profile::class], version = 2, exportSchema = false)
 abstract class ProfileDatabase: RoomDatabase() {
     // Data access object for the entity.
     //abstract val profileDao: ProfileDao

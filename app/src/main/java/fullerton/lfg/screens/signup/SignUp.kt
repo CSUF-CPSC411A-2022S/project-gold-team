@@ -1,6 +1,5 @@
 package fullerton.lfg.screens.signup
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 
@@ -15,13 +14,11 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import fullerton.lfg.ProfileRepo
 import fullerton.lfg.R
-import fullerton.lfg.data.model.LoggedInUserView
+import fullerton.lfg.database.Profile
 import fullerton.lfg.database.ProfileDatabase
 import fullerton.lfg.databinding.SignUpBinding
 
@@ -36,7 +33,7 @@ class SignUp : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         signUpBinding = SignUpBinding.inflate(inflater, container, false)
         binding = signUpBinding
@@ -53,7 +50,7 @@ class SignUp : Fragment() {
 
         val viewModelFactory = SignUpViewModelFactory(repo, application)
 
-        signUpViewModel = ViewModelProvider(this, viewModelFactory).get(SignUpViewModel::class.java)
+        signUpViewModel = ViewModelProvider(this, viewModelFactory)[SignUpViewModel::class.java]
 
         binding?.apply {
             // Specify the fragment as the lifecycle owner
@@ -108,19 +105,23 @@ class SignUp : Fragment() {
                 Log.i("Testing", "Inside SignupResult.error")
             }
             if (signupResult.success != null) {
-                updateUiWithUser(signupResult.success)
+
+                signUpViewModel.createProfile(
+                    firstname = signupResult.success.firstname,
+                    lastname = signupResult.success.lastname,
+                    username = signupResult.success.username,
+                    password = signupResult.success.password)
                 Log.i("Testing", "Inside SignupResult.success")
+                updateUiWithUser(signupResult.success)
             }
 
         })
 
-        signUpViewModel.userDetails.observe(viewLifecycleOwner, Observer {
-            val userDetails = it ?: return@Observer
-        })
+
 
         firstName?.afterTextChanged {
             signUpViewModel.signupDataChanged(
-                firstName?.text.toString(),
+                firstName.text.toString(),
                 lastName?.text.toString(),
                 email?.text.toString(),
                 password?.text.toString(),
@@ -131,7 +132,7 @@ class SignUp : Fragment() {
         lastName?.afterTextChanged {
             signUpViewModel.signupDataChanged(
                 firstName?.text.toString(),
-                lastName?.text.toString(),
+                lastName.text.toString(),
                 email?.text.toString(),
                 password?.text.toString(),
                 confirmPassword?.text.toString()
@@ -142,7 +143,7 @@ class SignUp : Fragment() {
             signUpViewModel.signupDataChanged(
                     firstName?.text.toString(),
                 lastName?.text.toString(),
-                email?.text.toString(),
+                email.text.toString(),
                 password?.text.toString(),
                 confirmPassword?.text.toString()
             )
@@ -154,7 +155,7 @@ class SignUp : Fragment() {
                     firstName?.text.toString(),
                     lastName?.text.toString(),
                     email?.text.toString(),
-                    password?.text.toString(),
+                    password.text.toString(),
                     confirmPassword?.text.toString()
 
                 )
@@ -168,7 +169,7 @@ class SignUp : Fragment() {
                     lastName?.text.toString(),
                     email?.text.toString(),
                     password?.text.toString(),
-                    confirmPassword?.text.toString()
+                    confirmPassword.text.toString()
 
                 )
             }
@@ -194,7 +195,7 @@ class SignUp : Fragment() {
             loading?.visibility = View.VISIBLE
             signUpViewModel.createUser(firstName?.text.toString(),lastName?.text.toString(),email?.text.toString(),password?.text.toString(),
                 confirmPassword?.text.toString())
-            Log.i("Testing", "Inside Submit Button")
+            Log.i("Testing", "Leaving Submit Button")
             //findNavController().navigate(R.id.action_signUp_to_loggedIn)
 
         }
@@ -205,9 +206,9 @@ class SignUp : Fragment() {
 
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView?) {
+    private fun updateUiWithUser(model: Profile?) {
         val welcome = getString(R.string.welcome)
-        val displayName = model?.displayName.toString()
+        val displayName = model?.firstname.toString()
         Toast.makeText(
             requireContext(),
             "$welcome $displayName",
