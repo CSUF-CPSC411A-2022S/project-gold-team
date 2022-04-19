@@ -21,8 +21,8 @@ interface ProfileDao {
     //@Query("SELECT * from profile_table WHERE user_name = :key")
     //fun get(key: String): LiveData<Profile>?
 
-    @Query("SELECT * from profile_table WHERE user_name LIKE :username")
-    fun getProfile(username: String): LiveData<Profile>?
+    @Query("SELECT * from profile_table WHERE user_name = :username")
+    fun getProfile(username: String): LiveData<Profile>
 
     // Custom query for retrieving all Intersection entities from a table in the database.
     // Data is stored to a List LiveData. We don't use suspend because LiveData objects
