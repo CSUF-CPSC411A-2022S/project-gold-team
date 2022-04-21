@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import fullerton.lfg.databinding.EventInfoBinding
+import fullerton.lfg.DataSource.*
+import fullerton.lfg.BlogPost.*
 
 /**
  * A simple [Fragment] subclass.
@@ -21,15 +22,24 @@ class EventInfo : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding = EventInfoBinding.inflate(layoutInflater)
-//        val list = ArrayList<BlogPost>() I would need to import this from Josh's code so we can push onto the array.
-//        val list = ArrayList<String>()
+
+        val tempTitle = "Congratualtions!"
+        val tempBody = "You made it to the end of the course!\n" + "\n" + "Next we'll be building the REST API!"
+        val tempImg = "https://raw.githubusercontent.com/mitchtabian/Blog-Images/master/digital_ocean.png"
+        val tempUser = "Sally"
+
+        val tempList = ArrayList<BlogPost>()
+
+        binding.eventName.setText(BlogPost.title)
+        binding.description.setText(BlogPost.body)
+        binding.time.setText(BlogPost.image)
+        binding.location.setText(BlogPost.username)
 
         binding.addEvent.setOnClickListener{
-//            list.add(EditText.text.toString())
+            tempList.add(BlogPost( tempTitle, tempBody, tempImg, tempUser))
             val toast = Toast.makeText(getContext(), "Event has been added.", Toast.LENGTH_SHORT).show()
         }
-
+        println(tempList)
         return binding.root
     }
-
 }
