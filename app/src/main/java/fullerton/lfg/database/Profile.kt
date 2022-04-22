@@ -12,20 +12,20 @@ data class Profile(
     @ColumnInfo(name = "profile_id")
     var profileId: Int = 0,
 
-    // Non-rprimary key column. Data type is specified in the property.
+    // Non-primary key column. Data type is specified in the property.
     @ColumnInfo(name = "first_name")
     var firstname: String = "",
 
-    // Non-rprimary key column. Data type is specified in the property.
+    // Non-primary key column. Data type is specified in the property.
     @ColumnInfo(name = "last_name")
     var lastname: String = "",
 
-    // Non-rprimary key column. Data type is specified in the property.
+    // Non-primary key column. Data type is specified in the property.
 
     @ColumnInfo(name = "user_name")
     var username: String = "",
 
-    // Non-rprimary key column. Data type is specified in the property.
+    // Non-primary key column. Data type is specified in the property.
     @ColumnInfo(name = "password")
     var password: String = ""
 )

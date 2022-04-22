@@ -33,7 +33,7 @@ class SignUpViewModel(
 
     fun signUpUser(
         firstname: String, lastname: String, username: String,
-        password: String, confirmPassword: String
+        password: String
     ) {
 
         // can be launched in a separate asynchronous job
@@ -42,10 +42,10 @@ class SignUpViewModel(
 
 
 
-        Log.i("Testing", checkResult.toString() + "<- Inside createUser function")
+        Log.i("Testing", "$checkResult<- Inside signUpUser function")
 
-        if (checkResult == true) {
-            Log.i("Testing", "Inside result == null")
+        if (checkResult) {
+            Log.i("Testing", "Inside checkResult == true")
 
             _signupResult.value =
                 SignupResult(
@@ -55,30 +55,30 @@ class SignUpViewModel(
                     )
                 )
 
-        } else if (checkResult == false) {
+        } else if (!checkResult) {
             _signupResult.value = SignupResult(error = R.string.signup_failed)
-            Log.i("Testing", "Inside result == else")
+            Log.i("Testing", "Inside checkResult == false")
         }
     }
 
 
-    fun checkIfUserExists(username: String): Boolean? {
+    private fun checkIfUserExists(username: String): Boolean {
         var result = ""
         for (profile in allProfiles.value!!) {
-            profile.username + " " + username + " <- Inside checkuser function for loop"
+            profile.username + " " + username + " <- Inside checkIfUserExists function for loop"
             if (profile.username == username) {
                 //Log.i( "Testing",
-                    //profile.username + " " + username + " <- Inside checkuser function for loop"
-               // )
+                //profile.username + " " + username + " <- Inside checkIfUserExists function for loop"
+                // )
                 result = false.toString()
+                break
 
-            }
-            else if (profile.username != username) {
+            } else {
                 result = true.toString()
             }
 
         }
-        Log.i("Testing", result + " <- Inside checkIfUserExists function")
+        Log.i("Testing", "$result <- Inside checkIfUserExists function result")
         return result.toBoolean()
     }
 
