@@ -12,11 +12,13 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 
 import androidx.navigation.fragment.findNavController
 import fullerton.lfg.R
+import fullerton.lfg.data.model.LoggedInUserView
+import fullerton.lfg.database.ProfileDatabase
 
 import fullerton.lfg.databinding.LoginBinding
 
@@ -25,7 +27,7 @@ class Login : Fragment() {
 
     private var binding: LoginBinding? = null
 
-    private val loginViewModel: LoginViewModel by activityViewModels()
+    private lateinit var loginViewModel: LoginViewModel
     private lateinit var loginBinding: LoginBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +40,12 @@ class Login : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val application = requireNotNull(this.activity).application
+        val dataSource = ProfileDatabase.getInstance(application).profileDao
+
+        val viewModelFactory = LoginModelFactory(dataSource, application)
+        loginViewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
 
         binding?.logIn = this
 
@@ -61,6 +69,10 @@ class Login : Fragment() {
             }
         })
 
+        loginViewModel.allProfiles.observe(viewLifecycleOwner){
+            profiles ->
+        }
+
         loginViewModel.loginResult.observe(viewLifecycleOwner, Observer {
             val loginResult = it ?: return@Observer
 
@@ -69,10 +81,7 @@ class Login : Fragment() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
-                val loggedin = loginResult.success.displayName
-                val action = LoginDirections.actionLoginToLoggedIn(loggedin)
-                findNavController().navigate(action)
-                onDestroyView()
+                updateUiWithUser(loginResult.success)
             }
         })
 
@@ -91,7 +100,7 @@ class Login : Fragment() {
                 )
             }
 
-            this?.setOnEditorActionListener { _, actionId, _ ->
+            this.setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
                         loginViewModel.login(
@@ -105,12 +114,27 @@ class Login : Fragment() {
             login?.setOnClickListener {
                 loading?.visibility = View.VISIBLE
                 loginViewModel.login(username?.text.toString(), password.text.toString())
+                onDestroyView()
             }
 
             signup?.setOnClickListener{
                 findNavController().navigate(R.id.action_login_to_signUp)
             }
         }
+    }
+
+    private fun updateUiWithUser(model: LoggedInUserView?) {
+        val welcome = getString(R.string.welcome)
+        val displayName = model?.displayName
+        //Toast.makeText(
+            //requireContext(),
+            //"$welcome $displayName",
+            //Toast.LENGTH_LONG
+        //).show()
+        val action = LoginDirections.actionLoginToLoggedIn(displayName!!)
+        findNavController().navigate(action)
+        onDestroyView()
+
     }
 
     override fun onDestroyView() {

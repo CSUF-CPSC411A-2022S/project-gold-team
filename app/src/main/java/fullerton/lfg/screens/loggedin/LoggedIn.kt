@@ -46,7 +46,7 @@ class LoggedIn : Fragment() {
         val createEvent = binding?.createEvent
         val browseEvent = binding?.browseEvent
         val myEvents = binding?.myEvents
-        val profile =binding?.profile
+        val profile = binding?.profile
 
         greet?.text = "Welcome $loggedin"
 
