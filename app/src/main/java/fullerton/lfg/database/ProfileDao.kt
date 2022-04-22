@@ -1,7 +1,10 @@
 package fullerton.lfg.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface ProfileDao {
@@ -27,7 +30,7 @@ interface ProfileDao {
     // Custom query for retrieving all Intersection entities from a table in the database.
     // Data is stored to a List LiveData. We don't use suspend because LiveData objects
     // are already designed to work asynchronously.
-    @Query("SELECT * from profile_table ORDER BY user_name DESC")
+    @Query("SELECT * from profile_table ORDER BY profile_Id DESC")
     fun getAllProfiles(): LiveData<List<Profile>>
 
     // Custom query for deleting all entities on a table in the database

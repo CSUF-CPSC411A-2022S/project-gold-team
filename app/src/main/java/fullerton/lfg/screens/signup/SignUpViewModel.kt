@@ -2,28 +2,27 @@ package fullerton.lfg.screens.signup
 
 
 import android.app.Application
+import android.util.Log
 import android.util.Patterns
-
 import androidx.lifecycle.*
 import fullerton.lfg.R
-
-import fullerton.lfg.database.Profile
-import android.util.Log
 import fullerton.lfg.data.model.User
+import fullerton.lfg.database.Profile
 import fullerton.lfg.database.ProfileDao
-
 import kotlinx.coroutines.launch
 
 class SignUpViewModel(
     private val database: ProfileDao,
     application: Application
-) : ViewModel() {
+) : AndroidViewModel(application) {
 
 
     init {
         Log.i("Testing", "init")
+
     }
 
+    val allProfiles: LiveData<List<Profile>> = database.getAllProfiles()
 
     private val _signupForm = MutableLiveData<SignUpFormState>()
     val signupFormState: LiveData<SignUpFormState> = _signupForm
@@ -31,29 +30,21 @@ class SignUpViewModel(
     private val _signupResult = MutableLiveData<SignupResult>()
     val signupResult: LiveData<SignupResult> = _signupResult
 
-    private val _userDetail = MutableLiveData<Profile>()
-    val userDetail: LiveData<Profile> = _userDetail
 
-    fun createUser(
+    fun signUpUser(
         firstname: String, lastname: String, username: String,
         password: String, confirmPassword: String
     ) {
 
         // can be launched in a separate asynchronous job
         Log.i("Testing", "Inside createUser function")
-        val result = checkIfUserExists(username)
-        Log.i("Testing", result?.value?.username + " <- result in createUser")
-        var userDetail = Transformations.map(result){
-            results ->
-            var user = ""
-            user += results.username
-            Log.i("Testing", results.username + " <- results.username")
-            user
-        }
+        val checkResult = checkIfUserExists(username)
 
 
-        Log.i("Testing", userDetail.value + " <- userDetail")
-        if (userDetail.value == null) {
+
+        Log.i("Testing", checkResult.toString() + "<- Inside createUser function")
+
+        if (checkResult == true) {
             Log.i("Testing", "Inside result == null")
 
             _signupResult.value =
@@ -64,15 +55,31 @@ class SignUpViewModel(
                     )
                 )
 
-        } else if (userDetail.value != null) {
+        } else if (checkResult == false) {
             _signupResult.value = SignupResult(error = R.string.signup_failed)
             Log.i("Testing", "Inside result == else")
         }
     }
 
-    private fun checkIfUserExists(username: String): LiveData<Profile> {
-        Log.i("Testing", "Inside checkIfUserExists function")
-        return database.getProfile(username)
+
+    fun checkIfUserExists(username: String): Boolean? {
+        var result = ""
+        for (profile in allProfiles.value!!) {
+            profile.username + " " + username + " <- Inside checkuser function for loop"
+            if (profile.username == username) {
+                //Log.i( "Testing",
+                    //profile.username + " " + username + " <- Inside checkuser function for loop"
+               // )
+                result = false.toString()
+
+            }
+            else if (profile.username != username) {
+                result = true.toString()
+            }
+
+        }
+        Log.i("Testing", result + " <- Inside checkIfUserExists function")
+        return result.toBoolean()
     }
 
     fun insert(

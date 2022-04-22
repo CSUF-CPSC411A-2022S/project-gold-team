@@ -16,7 +16,9 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import fullerton.lfg.R
+import fullerton.lfg.data.ProfileResult
 import fullerton.lfg.data.model.User
 import fullerton.lfg.database.ProfileDatabase
 import fullerton.lfg.databinding.SignUpBinding
@@ -69,6 +71,8 @@ class SignUp : Fragment() {
         val cancel = binding?.cancelButton
         val loading = binding?.loading
 
+
+
         signUpViewModel.signupFormState.observe(viewLifecycleOwner, Observer {
             val signupState = it ?: return@Observer
 
@@ -92,35 +96,48 @@ class SignUp : Fragment() {
             }
         })
 
+        signUpViewModel.allProfiles.observe(viewLifecycleOwner, Observer {
+            val profiles = it ?: return@Observer
+        })
+
+        /**
+        signUpViewModel.profileResult.observe(viewLifecycleOwner, Observer {
+            val profileResult = it ?: return@Observer
+
+        })
+        */
+
+
         signUpViewModel.signupResult.observe(viewLifecycleOwner, Observer {
             val signupResult = it ?: return@Observer
 
             loading?.visibility = View.GONE
+
             if (signupResult.error != null) {
                 showSignupFailed(signupResult.error)
                 Log.i("Testing", "Inside SignupResult.error")
             }
             if (signupResult.success != null) {
+                /**
                 signUpViewModel.insert(
                     firstname = signupResult.success.firstName,
                     lastname = signupResult.success.lastName,
                     username = signupResult.success.userId,
                     password = signupResult.success.password
                 )
+                */
+                Log.i("Testing", "Inside SignupResult.success")
                 updateUiWithUser(signupResult.success)
             }
 
         })
 
-        signUpViewModel.userDetail.observe(viewLifecycleOwner, Observer {
-            val userDetail = it ?: return@Observer
-        })
 
 
 
         firstName?.afterTextChanged {
             signUpViewModel.signupDataChanged(
-                firstName.text.toString(),
+                firstName?.text.toString(),
                 lastName?.text.toString(),
                 email?.text.toString(),
                 password?.text.toString(),
@@ -177,7 +194,7 @@ class SignUp : Fragment() {
         signUpBinding.signupTextView.setOnEditorActionListener { _, actionId, _ ->
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE ->
-                    signUpViewModel.createUser(
+                    signUpViewModel.signUpUser(
                         firstName?.text.toString(),
                         lastName?.text.toString(),
                         email?.text.toString(),
@@ -193,13 +210,15 @@ class SignUp : Fragment() {
         submit?.setOnClickListener {
             Log.i("Testing", "Inside Submit Button")
             loading?.visibility = View.VISIBLE
-            signUpViewModel.createUser(
+
+            signUpViewModel.signUpUser(
                 firstName?.text.toString(),
                 lastName?.text.toString(),
                 email?.text.toString(),
                 password?.text.toString(),
                 confirmPassword?.text.toString()
             )
+
             Log.i("Testing", "Leaving Submit Button")
             //findNavController().navigate(R.id.action_signUp_to_loggedIn)
 
