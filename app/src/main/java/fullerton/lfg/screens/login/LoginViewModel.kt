@@ -26,8 +26,7 @@ class LoginViewModel(
     val loginResult: LiveData<LoginResult> = _loginResult
 
     fun login(username: String, password: String) {
-        // can be launched in a separate asynchronous job
-        //val result = LoginRepo().login(username, password)
+
         val result = checkIfUserExists(username, password)
 
         if (result == true) {
