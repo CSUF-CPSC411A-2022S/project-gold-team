@@ -25,6 +25,7 @@ class SignUpViewModel(
     }
 
     val allProfiles: LiveData<List<Profile>> = database.getAllProfiles()
+    val getProfile: LiveData<Profile>? = isUserName?.let { database.getProfile(it) }
 
     private val _signupForm = MutableLiveData<SignUpFormState>()
     val signupFormState: LiveData<SignUpFormState> = _signupForm
@@ -33,16 +34,27 @@ class SignUpViewModel(
     val signupResult: LiveData<SignupResult> = _signupResult
 
 
+    private var userName: String? = null
+    private
+
+    val isUserName: String?
+        get() = userName
+
+    private fun setUserName(username: String) {
+        this.userName = username
+    }
+
     fun signUpUser(
         firstname: String, lastname: String, username: String,
         password: String
     ) {
-
-        // can be launched in a separate asynchronous job
+// can be launched in a separate asynchronous job
         Log.i("Testing", "Inside createUser function")
+        setUserName(username)
         val checkResult = checkIfUserExists(username)
 
 
+        Log.i("Testing", getProfile?.value?.firstname + " <- Inside getProfile function")
 
         Log.i("Testing", "$checkResult<- Inside signUpUser function")
 

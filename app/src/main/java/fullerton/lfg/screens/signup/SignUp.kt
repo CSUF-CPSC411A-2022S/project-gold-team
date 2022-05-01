@@ -101,6 +101,10 @@ class SignUp : Fragment() {
 
         }
 
+        signUpViewModel.getProfile?.observe(viewLifecycleOwner, Observer {
+            val profile = it ?: return@Observer
+        })
+
 
         signUpViewModel.signupResult.observe(viewLifecycleOwner, Observer {
             val signupResult = it ?: return@Observer
