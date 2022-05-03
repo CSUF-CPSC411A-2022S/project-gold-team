@@ -1,17 +1,14 @@
 package fullerton.lfg.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface ProfileDao {
     // Add an intersection entity to a table in the database.
     // We use suspend to run the function asynchronously (coroutine).
-    @Insert
-    suspend fun insert(profile: Profile)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addProfile(profile: Profile)
 
     // Update an intersection entity to a table in the database. Often uses the primary key
     // We use suspend to run the function asynchronously (coroutine).

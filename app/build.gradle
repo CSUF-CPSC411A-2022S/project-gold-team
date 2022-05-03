@@ -40,6 +40,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.room:room-common:2.4.2'
+
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
