@@ -13,8 +13,8 @@ class UserInfo {
                     "Zules",
                     "Perez",
                     "hi@hot.com",
-                    "password123",
-                    "Zules"
+                    "password123"
+
 
                 )
 
@@ -24,8 +24,8 @@ class UserInfo {
                     "Joshua",
                     "Konechy",
                     "bruh@hotmail.com",
-                    "password123",
-                    "Joshua"
+                    "password123"
+
 
                 )
 
@@ -35,8 +35,8 @@ class UserInfo {
                     "Allen",
                     "Rivas",
                     "sup@hotmail.com",
-                    "password123",
-                    "Allen"
+                    "password123"
+
 
                 )
 
@@ -46,8 +46,8 @@ class UserInfo {
                     "Minh",
                     "Le",
                     "yo@hotmail.com",
-                    "password123",
-                    "Minh"
+                    "password123"
+
 
                 )
 
@@ -57,8 +57,8 @@ class UserInfo {
                     "Jason",
                     "Fake",
                     "hi@hotmail.com",
-                    "password123",
-                    "Jason"
+                    "password123"
+
                 )
 
             )
@@ -67,8 +67,8 @@ class UserInfo {
                     "Ryan",
                     "Fake",
                     "wazup@hotmail.com",
-                    "password123",
-                    "Ryan"
+                    "password123"
+
 
                 )
 
@@ -78,9 +78,7 @@ class UserInfo {
                     "Sasha",
                     "Fake",
                     "aloha@hotmail.com",
-                    "password123",
-                    "Sasha"
-
+                    "password123"
                 )
 
             )

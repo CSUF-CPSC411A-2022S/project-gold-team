@@ -1,16 +1,24 @@
 package fullerton.lfg.screens.login
 
+import android.app.Application
+import android.util.Log
 import android.util.Patterns
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import fullerton.lfg.R
-import fullerton.lfg.data.LoginRepo
-import fullerton.lfg.data.Result
 import fullerton.lfg.data.model.LoggedInUserView
+import fullerton.lfg.database.Profile
+import fullerton.lfg.database.ProfileDao
 
-class LoginViewModel() : ViewModel() {
+class LoginViewModel(
+    private val database: ProfileDao,
+    application: Application
+) : AndroidViewModel(application) {
 
+    val allProfiles: LiveData<List<Profile>> = database.getAllProfiles()
+
+    private val _userDetail = MutableLiveData<Profile>()
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
@@ -18,16 +26,45 @@ class LoginViewModel() : ViewModel() {
     val loginResult: LiveData<LoginResult> = _loginResult
 
     fun login(username: String, password: String) {
-        // can be launched in a separate asynchronous job
-        val result = LoginRepo().login(username, password)
 
-        if (result is Result.Success) {
+        val result = checkIfUserExists(username, password)
+
+        if (result == true) {
             _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+                LoginResult(success = LoggedInUserView(displayName = _userDetail.value?.firstname!!))
 
-        } else {
+        } else if (result == false) {
             _loginResult.value = LoginResult(error = R.string.login_failed)
         }
+    }
+
+    private fun checkIfUserExists(username: String, password: String): Boolean {
+        var result = ""
+        if (allProfiles.value.isNullOrEmpty()) {
+            result = false.toString()
+        } else {
+            for (profile in allProfiles.value!!) {
+                Log.i(
+                    "Testing",
+                    profile.username + " " + username + " <- Inside checkIfUserExists function for loop"
+                )
+                if (profile.username == username && profile.password == password) {
+                    Log.i(
+                        "Testing",
+                        profile.username + " " + username + " <- Inside checkIfUserExists function for loop"
+                    )
+                    _userDetail.value = profile
+                    result = true.toString()
+                    break
+
+                } else {
+                    result = false.toString()
+                }
+
+            }
+        }
+        Log.i("Testing", "$result <- Inside checkIfUserExists function result")
+        return result.toBoolean()
     }
 
     fun loginDataChanged(username: String, password: String) {
