@@ -37,7 +37,7 @@ abstract class PostDatabase: RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         PostDatabase::class.java, // Your database class
-                        "intersection_database"
+                        "post_database"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

@@ -1,61 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="10dp"
-    app:cardCornerRadius="2dp"
-    app:cardPreventCornerOverlap="false"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Single item on the RecyclerView -->
+    <data>
+        <!-- Variable that holds information about a single intersection. -->
+        <variable
+            name="Post"
+            type="fullerton.lfg.PostDatabase.Post" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
-        <ImageView
+        <!-- Displays the name of the intersection. Clicking on the intersection will call
+             the passed clickListener's onClick function. It passes the intersection object
+             also used for populating the interface.
+        -->
+        <TextView
+            android:id="@+id/name"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:id="@+id/blog_image"
-            android:padding="0dp"
-            android:layout_margin="0dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/blog_image"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#72673AB7"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@{Post.name}"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:id="@+id/container1"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/blog_title"
-                android:text="The Title of a Blog"
-                android:textColor="#000"
-                android:textSize="19sp"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/blog_author"
-                android:text="Mitch Tabian"
-                android:textSize="15sp"
-                android:layout_marginTop="10dp"
-                />
-        </LinearLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</layout>

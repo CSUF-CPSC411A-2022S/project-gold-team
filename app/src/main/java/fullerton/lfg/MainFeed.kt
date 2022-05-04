@@ -5,26 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.recyclerview.widget.LinearLayoutManager
-import fullerton.lfg.RecyclerView.BlogRecyclerAdapter
-import fullerton.lfg.RecyclerView.DataSource
-import fullerton.lfg.RecyclerView.TopSpacingItemDecoration
 import fullerton.lfg.databinding.FragmentMainFeedBinding
 import kotlinx.android.synthetic.main.fragment_main_feed.*
 
 
-import androidx.appcompat.app.AppCompatActivity
-
-
 import kotlinx.android.synthetic.recycler_view.*
-import fullerton.lfg.models.BlogPost
-
-import org.json.JSONArray
-import org.json.JSONObject
-import java.io.IOException
-import java.io.InputStream
-
 
 
 class MainFeed : Fragment() {
