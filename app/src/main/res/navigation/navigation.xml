@@ -48,4 +48,9 @@
         android:name="fullerton.lfg.MapFragment"
         android:label="map_fragment"
         tools:layout="@layout/map_fragment"/>
+    <fragment
+        android:id="@+id/profile2"
+        android:name="fullerton.lfg.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
