@@ -33,7 +33,7 @@ interface PostDao {
     // Data is stored to a List LiveData. We don't use suspend because LiveData objects
     // are already designed to work asynchronously.
     @Query("SELECT * from Post_table ORDER BY PostId DESC")
-    fun getAllIntersections(): LiveData<List<Post>>
+    fun getAllPosts(): LiveData<List<Post>>
 
     // Custom query for deleting all entities on a table in the database
     // We use suspend to run the function asynchronously (coroutine).

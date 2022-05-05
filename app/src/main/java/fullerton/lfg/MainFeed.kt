@@ -1,3 +1,5 @@
+/*
+
 package fullerton.lfg
 
 import android.os.Bundle
@@ -10,13 +12,13 @@ import fullerton.lfg.databinding.FragmentMainFeedBinding
 import kotlinx.android.synthetic.main.fragment_main_feed.*
 
 
-import kotlinx.android.synthetic.recycler_view.*
+import kotlinx.android.synthetic.post_recyclerview.*
 
 
 class MainFeed : Fragment() {
 
 
-    private lateinit var blogAdapter: BlogRecyclerAdapter
+    private lateinit var blogAdapter: postListAdapter
 
     private var binding: FragmentMainFeedBinding? = null
     private lateinit var MainFeedBinding: FragmentMainFeedBinding
@@ -33,25 +35,7 @@ class MainFeed : Fragment() {
         binding = MainFeedBinding
         return MainFeedBinding.root
 
-        initRecyclerView()
-        addDataSet()
     }
-
-    private fun addDataSet(){
-        val data = DataSource.createDataSet()
-        blogAdapter.submitList(data)
-    }
-
-    private fun initRecyclerView(){
-
-        recycler_view.apply {
-            layoutManager = LinearLayoutManager(activity)
-            val topSpacingDecorator = TopSpacingItemDecoration(30)
-            addItemDecoration(topSpacingDecorator)
-            blogAdapter = BlogRecyclerAdapter()
-            adapter = blogAdapter
-        }
-    }
-
 
 }
+*/

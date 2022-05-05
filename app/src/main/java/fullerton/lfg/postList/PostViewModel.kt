@@ -25,7 +25,7 @@ class PostViewModel(
 
     // Retrieves all Intersection objects from the database
     // Represented as a LiveData<List<Intersection>>
-    val intersectionList = database.getAllIntersections()
+    val postList = database.getAllPosts()
 
     /**
      * Inserts the Intersection object into the database.
@@ -37,7 +37,6 @@ class PostViewModel(
             // Create Intersection object using data stored in the EditText views
             var post = Post()
             post.name = name.value.toString()
-            post.postId = postId.value.toString()
             post.title = title.value.toString()
             post.body = body.value.toString()
             post.location = location.value.toString()

@@ -7,8 +7,13 @@
     <data>
         <!-- Variable that holds information about a single intersection. -->
         <variable
-            name="Post"
+            name="post"
             type="fullerton.lfg.PostDatabase.Post" />
+
+        <!-- Variable that holds a reference to the click listener. -->
+        <variable
+            name="clickListener"
+            type="fullerton.lfg.postList.PostListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +36,8 @@
             android:gravity="center_vertical"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="@{Post.name}"
+            android:onClick="@{()-> clickListener.onClick(post)}"
+            android:text="@{post.name}"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

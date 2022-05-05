@@ -40,12 +40,11 @@
         tools:layout="@layout/logged_in" >
         <argument android:name="loggedin" />
         <action
-            android:id="@+id/action_loggedIn_to_mainFeed"
-            app:destination="@id/mainFeed" />
+            android:id="@+id/action_loggedIn_to_postListFragment"
+            app:destination="@id/postListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mainFeed"
-        android:name="fullerton.lfg.MainFeed"
-        android:label="fragment_main_feed"
-        tools:layout="@layout/fragment_main_feed" />
+        android:id="@+id/postListFragment"
+        android:name="fullerton.lfg.postList.PostListFragment"
+        android:label="PostListFragment" />
 </navigation>

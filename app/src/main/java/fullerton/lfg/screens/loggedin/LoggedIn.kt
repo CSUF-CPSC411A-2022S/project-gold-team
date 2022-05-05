@@ -57,7 +57,7 @@ class LoggedIn : Fragment() {
 
         browseEvent?.setOnClickListener {
             // Replace action with correct direction
-            findNavController().navigate(R.id.action_loggedIn_to_mainFeed)
+            findNavController().navigate(R.id.action_loggedIn_to_postListFragment)
         }
 
         myEvents?.setOnClickListener {

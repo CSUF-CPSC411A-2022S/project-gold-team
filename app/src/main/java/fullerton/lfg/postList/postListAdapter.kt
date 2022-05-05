@@ -15,7 +15,7 @@ import fullerton.lfg.databinding.LayoutBlogListItemBinding
  * A RecyclerView adapter that uses the DiffCallback for better performance.
  */
 class PostListAdapter() : ListAdapter<Post,
-        PostListAdapter.ItemViewHolder>(IntersectionDiffCallback()) {
+        PostListAdapter.ItemViewHolder>(PostDiffCallback()) {
 
     /**
      * Inner class used to store data about each element in the RecyclerView. We provide a binding
@@ -57,7 +57,7 @@ class PostListAdapter() : ListAdapter<Post,
 /**
  * Manages a RecyclerView list using the Eugene W. Myers's difference algorithm to reduce processing.
  */
-class IntersectionDiffCallback : DiffUtil.ItemCallback<Post>() {
+class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
     /**
      * We use intersectionId because it is a unique ID referring to a single element.
      */
@@ -75,4 +75,13 @@ class IntersectionDiffCallback : DiffUtil.ItemCallback<Post>() {
                 oldItem.title == newItem.title
 
     }
+}
+
+
+/**
+ * Listener that accepts a lambda function clickListener. It will be called when an element of the
+ * RecyclerView is clicked/tapped.
+ */
+class PostListener(val clickListener: (postId: Long) -> Unit) {
+    fun onClick(post: Post) = clickListener(post.postId)
 }
