@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import fullerton.lfg.PostDatabase.Post
+import fullerton.lfg.postDatabase.Post
 
 import fullerton.lfg.databinding.LayoutBlogListItemBinding
 

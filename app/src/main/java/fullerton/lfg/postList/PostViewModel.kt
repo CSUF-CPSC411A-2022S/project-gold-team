@@ -2,8 +2,8 @@ package fullerton.lfg.postList
 
 import android.app.Application
 import androidx.lifecycle.*
-import fullerton.lfg.PostDatabase.Post
-import fullerton.lfg.PostDatabase.PostDao
+import fullerton.lfg.postDatabase.Post
+import fullerton.lfg.postDatabase.PostDao
 import kotlinx.coroutines.launch
 
 /**

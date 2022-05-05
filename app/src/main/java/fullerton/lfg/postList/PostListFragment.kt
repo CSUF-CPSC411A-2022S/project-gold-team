@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import fullerton.lfg.PostDatabase.PostDatabase
-import fullerton.lfg.databinding.FragmentMainFeedBinding
+import fullerton.lfg.postDatabase.PostDatabase
+
 import fullerton.lfg.R
 import fullerton.lfg.databinding.FragmentPostListBinding
 

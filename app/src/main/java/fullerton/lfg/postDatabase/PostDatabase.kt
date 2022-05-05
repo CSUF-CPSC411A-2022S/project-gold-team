@@ -1,4 +1,4 @@
-package fullerton.lfg.PostDatabase
+package fullerton.lfg.postDatabase
 
 import android.content.Context
 import androidx.room.Database

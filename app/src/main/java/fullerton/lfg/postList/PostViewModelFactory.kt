@@ -3,7 +3,7 @@ package fullerton.lfg.postList
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import fullerton.lfg.PostDatabase.PostDao
+import fullerton.lfg.postDatabase.PostDao
 
 /**
  * Generates an IntersectionViewModel tied to the database.

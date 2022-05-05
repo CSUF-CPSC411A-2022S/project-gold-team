@@ -1,4 +1,4 @@
-package fullerton.lfg.PostDatabase
+package fullerton.lfg.postDatabase
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

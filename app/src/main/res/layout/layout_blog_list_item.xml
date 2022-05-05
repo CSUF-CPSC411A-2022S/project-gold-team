@@ -8,7 +8,7 @@
         <!-- Variable that holds information about a single intersection. -->
         <variable
             name="post"
-            type="fullerton.lfg.PostDatabase.Post" />
+            type="fullerton.lfg.postDatabase.Post" />
 
         <!-- Variable that holds a reference to the click listener. -->
         <variable
