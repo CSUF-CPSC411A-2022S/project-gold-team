@@ -51,7 +51,7 @@ class GeocodingViewModel: ViewModel() {
                 var rotation = 0
                 // Create a URL using the retrieved values. The URL follows the Static Images API
                 // format.
-                _imageURL.value = "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/${longitude},${latitude},${zoom},${rotation}/450x600?access_token=${MapboxService.ACCESS_TOKEN}"
+                 _imageURL.value = "https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/static/pin-s+448ee4(${longitude},${latitude})/${longitude},${latitude},${zoom},${rotation}/450x600?access_token=${MapboxService.ACCESS_TOKEN}"
             } catch (e: Exception) {
                 _address.value = "Failure: ${e.message}"
             }
