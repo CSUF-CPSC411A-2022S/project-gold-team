@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
  * Manages the database that stores the Intersection table and its entitites.
  * The abstract class should inherit RoomDatabase()
  */
-@Database(entities = [Post::class], version = 1, exportSchema = false)
+@Database(entities = [Post::class], version = 2, exportSchema = false)
 abstract class PostDatabase: RoomDatabase() {
     // Data access object for the entity.
     abstract val postDao: PostDao
@@ -37,7 +37,7 @@ abstract class PostDatabase: RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         PostDatabase::class.java, // Your database class
-                        "post_database"
+                        "Post_table"
                     )
                         .fallbackToDestructiveMigration()
                         .build()
