@@ -58,11 +58,11 @@ class LoggedIn : Fragment() {
 
         browseEvent?.setOnClickListener {
             // Replace action with correct direction
-            //findNavController().navigate(R.id.action_signUp_to_logIn)
+            findNavController().navigate(R.id.action_loggedIn_to_postListFragment)
         }
 
         myEvents?.setOnClickListener {
-            // Replace action with correct direction
+            // Replace action with correct directionhi@hot.com
             //findNavController().navigate(R.id.action_signUp_to_logIn)
         }
 
