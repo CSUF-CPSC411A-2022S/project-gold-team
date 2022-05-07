@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import fullerton.lfg.R
+import fullerton.lfg.databinding.SettingsFragmentBinding
+
 
 class Settings : Fragment() {
 
