@@ -42,7 +42,7 @@ class Login : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val application = requireNotNull(this.activity).application
-        val dataSource = ProfileDatabase.getInstance(application).profileDao
+        val dataSource = ProfileDatabase.getInstance(application).profileDao()
 
         val viewModelFactory = LoginModelFactory(dataSource, application)
         loginViewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]

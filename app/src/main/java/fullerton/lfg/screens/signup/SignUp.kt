@@ -44,7 +44,7 @@ class SignUp : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val application = requireNotNull(this.activity).application
-        val dataSource = ProfileDatabase.getInstance(application).profileDao
+        val dataSource = ProfileDatabase.getInstance(application).profileDao()
 
         val viewModelFactory = SignUpViewModelFactory(dataSource, application)
 
