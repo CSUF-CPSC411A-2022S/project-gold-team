@@ -17,7 +17,7 @@ class PostViewModelFactory(
      * Creates the IntersectionViewModel
      */
     @Suppress("unchecked_cast")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PostViewModel::class.java)) { // ViewModel class
             return PostViewModel(dataSource, application) as T // Call ViewModel constructor
         }

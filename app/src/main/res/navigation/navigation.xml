@@ -44,6 +44,9 @@
         tools:layout="@layout/logged_in" >
         <argument android:name="loggedin" />
         <action
+            android:id="@+id/action_loggedIn_to_map"
+            app:destination="@id/map" />
+        <action
             android:id="@+id/action_loggedIn_to_postListFragment"
             app:destination="@id/postListFragment"
             app:popUpTo="@id/postListFragment" />
@@ -51,6 +54,11 @@
             android:id="@+id/action_loggedIn_to_createEvent"
             app:destination="@id/createEvent" />
     </fragment>
+    <fragment
+        android:id="@+id/map"
+        android:name="fullerton.lfg.MapFragment"
+        android:label="map_fragment"
+        tools:layout="@layout/map_fragment"/>
 
     <fragment
         android:id="@+id/postListFragment"
