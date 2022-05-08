@@ -47,10 +47,18 @@
             android:id="@+id/action_loggedIn_to_postListFragment"
             app:destination="@id/postListFragment"
             app:popUpTo="@id/postListFragment" />
+        <action
+            android:id="@+id/action_loggedIn_to_createEvent"
+            app:destination="@id/createEvent" />
     </fragment>
 
     <fragment
         android:id="@+id/postListFragment"
         android:name="fullerton.lfg.postList.PostListFragment"
         android:label="PostListFragment" />
+    <fragment
+        android:id="@+id/createEvent"
+        android:name="fullerton.lfg.CreateEvent"
+        android:label="fragment_create_event"
+        tools:layout="@layout/fragment_create_event" />
 </navigation>

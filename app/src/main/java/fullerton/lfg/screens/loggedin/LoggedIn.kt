@@ -52,7 +52,7 @@ class LoggedIn : Fragment() {
 
         createEvent?.setOnClickListener {
             // Replace action with correct direction
-            //findNavController().navigate(R.id.action_signUp_to_logIn)
+            findNavController().navigate(R.id.action_loggedIn_to_createEvent)
         }
 
         browseEvent?.setOnClickListener {
