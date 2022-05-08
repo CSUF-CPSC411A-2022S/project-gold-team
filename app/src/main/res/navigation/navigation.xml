@@ -21,6 +21,8 @@
             app:destination="@id/logIn" />
         <argument android:name="loggedin" />
     </fragment>
+
+
     <fragment
         android:id="@+id/signUp"
         android:name="fullerton.lfg.screens.signup.SignUp"
@@ -33,6 +35,8 @@
             android:id="@+id/action_signUp_to_logIn"
             app:destination="@id/logIn" />
     </fragment>
+
+
     <fragment
         android:id="@+id/loggedIn"
         android:name="fullerton.lfg.screens.loggedin.LoggedIn"
@@ -43,17 +47,26 @@
             android:id="@+id/action_loggedIn_to_map"
             app:destination="@id/map" />
         <action
-            android:id="@+id/action_loggedIn_to_settings"
-            app:destination="@id/settings" />
+            android:id="@+id/action_loggedIn_to_postListFragment"
+            app:destination="@id/postListFragment"
+            app:popUpTo="@id/postListFragment" />
+        <action
+            android:id="@+id/action_loggedIn_to_createEvent"
+            app:destination="@id/createEvent" />
     </fragment>
     <fragment
         android:id="@+id/map"
         android:name="fullerton.lfg.MapFragment"
         android:label="map_fragment"
         tools:layout="@layout/map_fragment"/>
+
     <fragment
-        android:id="@+id/settings"
-        android:name="fullerton.lfg.screens.settings.Settings"
-        android:label="settings_fragment"
-        tools:layout="@layout/settings_fragment" />
+        android:id="@+id/postListFragment"
+        android:name="fullerton.lfg.postList.PostListFragment"
+        android:label="PostListFragment" />
+    <fragment
+        android:id="@+id/createEvent"
+        android:name="fullerton.lfg.CreateEvent"
+        android:label="fragment_create_event"
+        tools:layout="@layout/fragment_create_event" />
 </navigation>
