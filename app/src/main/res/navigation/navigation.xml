@@ -92,5 +92,13 @@
         <action
             android:id="@+id/action_userProfile_to_logIn"
             app:destination="@id/logIn" />
+        <action
+            android:id="@+id/action_userProfile_to_editProfile"
+            app:destination="@id/editProfile" />
     </fragment>
+    <fragment
+        android:id="@+id/editProfile"
+        android:name="fullerton.lfg.EditProfile"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>
