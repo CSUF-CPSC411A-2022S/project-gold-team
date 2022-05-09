@@ -15,14 +15,8 @@ interface ProfileDao {
     @Update
     suspend fun update(profile: Profile)
 
-    // Custom query for retrieving a single Intersection from a table in the database using
-    // its intersection id. We don't use suspend because LiveData objects are already designed
-    // to work asynchronous.
-    //@Query("SELECT * from profile_table WHERE user_name = :key")
-    //fun get(key: String): LiveData<Profile>?
-
-    @Query("SELECT * from profile_table WHERE user_name = :username")
-    fun getProfile(username: String): LiveData<Profile>
+    @Query("SELECT * from profile_table WHERE email = :email")
+    fun getProfile(email: String): LiveData<Profile>
 
     // Custom query for retrieving all Intersection entities from a table in the database.
     // Data is stored to a List LiveData. We don't use suspend because LiveData objects
