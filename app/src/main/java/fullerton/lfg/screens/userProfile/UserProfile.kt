@@ -1,15 +1,22 @@
 package fullerton.lfg.screens.userProfile
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import fullerton.lfg.R
 import fullerton.lfg.databinding.UserProfileBinding
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.fragment.findNavController
+import fullerton.lfg.database.Profile
+import fullerton.lfg.database.ProfileDatabase
 
 
 class UserProfile : Fragment() {
@@ -17,7 +24,7 @@ class UserProfile : Fragment() {
     private var binding: UserProfileBinding? = null
     val args: UserProfileArgs by navArgs()
 
-    private val userProfileViewModel: UserProfileViewModel by activityViewModels()
+    private lateinit var userProfileViewModel: UserProfileViewModel
     private lateinit var userProfileBinding: UserProfileBinding
 
     override fun onCreateView(
@@ -34,20 +41,27 @@ class UserProfile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding?.apply {
-//            lifecycleOwner = viewLifecycleOwner
-//            userProfileViewModel = userProfileViewModel
-//        }
-        val profile = userProfileViewModel._userProfile
-
-//        val pfn = profile.value?.firstname
-//        val pln = profile.value?.lastname
+        val application = requireNotNull(this.activity).application
+        val database = ProfileDatabase.getInstance(application).profileDao()
 
         val firstname = binding?.firstname
         val lastname = binding?.lastname
+        val viewModelFactory = UserProfileViewModelFactory(database, application, args.email)
+        userProfileViewModel = ViewModelProvider(this,
+            viewModelFactory)[UserProfileViewModel::class.java]
+        val email = args.email
+        Log.i("test email", email)
 
-        firstname?.text = "Welcome"
-        lastname?.text = "Goodbye"
+        userProfileViewModel.getUserProfile(email).observe(viewLifecycleOwner, Observer {
+            userProfile ->
+                if (userProfile != null) {
+                    firstname?.text = "Welcome ${userProfile.firstname}"
+                    lastname?.text = "Goodbye ${userProfile.lastname}"
+                }
+                else {
+                    Log.i("tag2", "????")
+                }
+        })
 
     }
 

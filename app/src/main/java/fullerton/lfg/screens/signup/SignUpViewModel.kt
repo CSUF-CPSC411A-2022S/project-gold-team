@@ -55,7 +55,7 @@ class SignUpViewModel(
 
         Log.i("Testing", "$checkResult<- Inside signUpUser function")
 
-        if (checkResult == true) {
+        if (checkResult) {
             Log.i("Testing", "Inside checkResult == true")
 
             _signupResult.value =
@@ -66,7 +66,7 @@ class SignUpViewModel(
                     )
                 )
 
-        } else if (checkResult == false) {
+        } else if (!checkResult) {
             _signupResult.value = SignupResult(error = R.string.signup_failed)
             Log.i("Testing", "Inside checkResult == false")
         }

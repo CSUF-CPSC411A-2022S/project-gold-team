@@ -29,11 +29,12 @@ class LoginViewModel(
 
         val result = checkIfUserExists(email, password)
 
-        if (result == true) {
+        if (result) {
             _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = _userDetail.value?.firstname!!, email = _userDetail.value?.email!!))
+                LoginResult(success = LoggedInUserView(displayName = _userDetail.value?.firstname!!,
+                    email = _userDetail.value?.email!!))
 
-        } else if (result == false) {
+        } else if (result) {
             _loginResult.value = LoginResult(error = R.string.login_failed)
         }
     }
