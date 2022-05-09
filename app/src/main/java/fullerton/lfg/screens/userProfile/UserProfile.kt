@@ -44,24 +44,51 @@ class UserProfile : Fragment() {
         val application = requireNotNull(this.activity).application
         val database = ProfileDatabase.getInstance(application).profileDao()
 
-        val fullname = binding?.fullname
+        // Field bindings
+        val fullName = binding?.fullname
+        val emailField = binding?.emailfield
+        val firstNameField = binding?.firstnamefield
+        val lastNameField = binding?.lastnamefield
+
         val viewModelFactory = UserProfileViewModelFactory(database, application, args.email)
         userProfileViewModel = ViewModelProvider(this,
             viewModelFactory)[UserProfileViewModel::class.java]
-        val email = args.email
-        Log.i("test email", email)
 
-        userProfileViewModel.getUserProfile(email).observe(viewLifecycleOwner, Observer {
+        // Args passed
+        val userEmail = args.email
+        Log.i("test email", userEmail)
+
+        // To pass back to previous fragment
+        var firstName = ""
+
+        userProfileViewModel.getUserProfile(userEmail).observe(viewLifecycleOwner, Observer {
             userProfile ->
                 if (userProfile != null) {
                     var fn = userProfile.firstname + " " + userProfile.lastname
-                    fullname?.text = fn
+                    fullName?.text = fn
+                    firstName = userProfile.firstname
+                    emailField?.text = userEmail
+                    firstNameField?.text = userProfile.firstname
+                    lastNameField?.text = userProfile.lastname
                 }
                 else {
                     Log.w("tag2", "null userProfile")
                 }
         })
 
+        // Buttons bindings
+        val backButton = binding?.userprofileback
+        val logoutButton = binding?.userprofilelogout
+
+        // Setup navigation from elements
+        backButton?.setOnClickListener {
+            findNavController().navigate(UserProfileDirections
+                .actionUserProfileToLoggedIn(firstName, userEmail))
+        }
+
+        logoutButton?.setOnClickListener {
+            findNavController().navigate(R.id.action_userProfile_to_logIn)
+        }
     }
 
 }

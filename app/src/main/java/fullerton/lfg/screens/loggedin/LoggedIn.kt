@@ -50,7 +50,7 @@ class LoggedIn : Fragment() {
         val profile = binding?.profile
         val maps = binding?.mapButton
 
-        greet?.text = "Welcome $email"
+        greet?.text = "Welcome $firstname"
 
         createEvent?.setOnClickListener {
             // Replace action with correct direction

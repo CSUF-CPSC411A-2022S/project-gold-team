@@ -15,9 +15,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="full name"
-            android:textSize="28dp"
+            android:textSize="20dp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/lfgreen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +32,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_backarrow" />
+
+        <View
+            android:id="@+id/bar1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lfgreen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fullname"
+            app:layout_constraintVertical_bias="0.051"
+            tools:layout_editor_absoluteX="0dp" />
 
         <TextView
             android:id="@+id/userprofilelogout"
@@ -51,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Account Settings"
-            android:textColor="#05750A"
+            android:textColor="@color/lfgreen"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,16 +71,163 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userpfp"
-            android:src="@mipmap/harold"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="28dp"
+            android:src="@mipmap/harold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userprofiletop">
+            app:layout_constraintTop_toBottomOf="@+id/userprofiletop"></de.hdodenhof.circleimageview.CircleImageView>
 
-        </de.hdodenhof.circleimageview.CircleImageView>
+        <ImageView
+            android:id="@+id/firstnameicon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/person"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar1" />
+
+        <View
+            android:id="@+id/bar2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/light_gray"
+            app:layout_constraintTop_toBottomOf="@id/firstnameicon"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <ImageView
+            android:id="@+id/lastnameicon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/person"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar2" />
+
+        <ImageView
+            android:id="@+id/emailicon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar3" />
+
+        <TextView
+            android:id="@+id/firstnametext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:text="First Name"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/firstnameicon"
+            app:layout_constraintTop_toBottomOf="@+id/bar1" />
+
+        <TextView
+            android:id="@+id/lastnametext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:text="Last Name"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/lastnameicon"
+            app:layout_constraintTop_toBottomOf="@+id/bar2" />
+
+        <View
+            android:id="@+id/bar3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/light_gray"
+            app:layout_constraintTop_toBottomOf="@id/lastnameicon"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/emailtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:text="Email"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/emailicon"
+            app:layout_constraintTop_toBottomOf="@+id/bar3" />
+
+        <TextView
+            android:id="@+id/firstnamefield"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:hint="First Name"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toTopOf="@+id/bar2"
+            app:layout_constraintStart_toEndOf="@+id/firstnametext"
+            app:layout_constraintTop_toBottomOf="@+id/bar1"
+            app:layout_constraintVertical_bias="0.552" />
+
+        <TextView
+            android:id="@+id/lastnamefield"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:hint="Last Name"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toTopOf="@+id/bar3"
+            app:layout_constraintStart_toEndOf="@+id/lastnametext"
+            app:layout_constraintTop_toBottomOf="@+id/bar2"
+            app:layout_constraintVertical_bias="0.54" />
+
+        <TextView
+            android:id="@+id/emailfield"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="20dp"
+            android:hint="Email"
+            app:layout_constraintStart_toEndOf="@+id/emailtext"
+            app:layout_constraintTop_toBottomOf="@+id/bar3" />
+
+        <View
+            android:id="@+id/bar4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/light_gray"
+            app:layout_constraintTop_toBottomOf="@+id/emailicon"
+            />
+
+        <Button
+            android:id="@+id/changePasswordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/lfgreen"
+            android:text="Change Password"
+            app:icon="@drawable/lock"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditProfileButton"
+            app:layout_constraintVertical_bias="0.105" />
+
+        <Button
+            android:id="@+id/EditProfileButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/lfgreen"
+            android:text="Edit Profile"
+            app:icon="@drawable/create"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bar4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

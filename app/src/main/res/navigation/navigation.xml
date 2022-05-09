@@ -86,5 +86,11 @@
         <argument
             android:name="email"
             app:argType="string" />
+        <action
+            android:id="@+id/action_userProfile_to_loggedIn"
+            app:destination="@id/loggedIn" />
+        <action
+            android:id="@+id/action_userProfile_to_logIn"
+            app:destination="@id/logIn" />
     </fragment>
 </navigation>
