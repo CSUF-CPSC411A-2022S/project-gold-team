@@ -25,13 +25,13 @@ class LoginViewModel(
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun login(username: String, password: String) {
+    fun login(email: String, password: String) {
 
-        val result = checkIfUserExists(username, password)
+        val result = checkIfUserExists(email, password)
 
         if (result == true) {
             _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = _userDetail.value?.firstname!!))
+                LoginResult(success = LoggedInUserView(displayName = _userDetail.value?.firstname!!, email = _userDetail.value?.email!!))
 
         } else if (result == false) {
             _loginResult.value = LoginResult(error = R.string.login_failed)
@@ -67,9 +67,9 @@ class LoginViewModel(
         return result.toBoolean()
     }
 
-    fun loginDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
-            _loginForm.value = LoginFormState(usernameError = R.string.invalid_email)
+    fun loginDataChanged(email: String, password: String) {
+        if (!isUserNameValid(email)) {
+            _loginForm.value = LoginFormState(emailError = R.string.invalid_email)
         } else if (!isPasswordValid(password)) {
             _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
         } else {
@@ -78,11 +78,11 @@ class LoginViewModel(
     }
 
     // A placeholder username validation check
-    private fun isUserNameValid(username: String): Boolean {
-        return if (username.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
+    private fun isUserNameValid(email: String): Boolean {
+        return if (email.contains('@')) {
+            Patterns.EMAIL_ADDRESS.matcher(email).matches()
         } else {
-            username.isNotBlank()
+            email.isNotBlank()
         }
     }
 
