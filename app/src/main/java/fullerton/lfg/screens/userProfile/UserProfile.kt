@@ -79,6 +79,7 @@ class UserProfile : Fragment() {
         // Buttons bindings
         val backButton = binding?.userprofileback
         val logoutButton = binding?.userprofilelogout
+        val editProfileButton = binding?.EditProfileButton
 
         // Setup navigation from elements
         backButton?.setOnClickListener {
@@ -89,6 +90,8 @@ class UserProfile : Fragment() {
         logoutButton?.setOnClickListener {
             findNavController().navigate(R.id.action_userProfile_to_logIn)
         }
+
+        //TODO: Add nav for edit Profile fragment
     }
 
 }
