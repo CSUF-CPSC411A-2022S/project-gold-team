@@ -44,8 +44,7 @@ class UserProfile : Fragment() {
         val application = requireNotNull(this.activity).application
         val database = ProfileDatabase.getInstance(application).profileDao()
 
-        val firstname = binding?.firstname
-        val lastname = binding?.lastname
+        val fullname = binding?.fullname
         val viewModelFactory = UserProfileViewModelFactory(database, application, args.email)
         userProfileViewModel = ViewModelProvider(this,
             viewModelFactory)[UserProfileViewModel::class.java]
@@ -55,11 +54,11 @@ class UserProfile : Fragment() {
         userProfileViewModel.getUserProfile(email).observe(viewLifecycleOwner, Observer {
             userProfile ->
                 if (userProfile != null) {
-                    firstname?.text = "Welcome ${userProfile.firstname}"
-                    lastname?.text = "Goodbye ${userProfile.lastname}"
+                    var fn = userProfile.firstname + " " + userProfile.lastname
+                    fullname?.text = fn
                 }
                 else {
-                    Log.i("tag2", "????")
+                    Log.w("tag2", "null userProfile")
                 }
         })
 

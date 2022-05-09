@@ -10,27 +10,68 @@
         tools:context=".screens.userProfile.UserProfile">
 
         <TextView
-            android:id="@+id/firstname"
+            android:id="@+id/fullname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="192dp"
-            android:hint="TextView"
+            android:layout_marginTop="16dp"
+            android:hint="full name"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userpfp" />
+
+        <ImageView
+            android:id="@+id/userprofileback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_backarrow" />
+
+        <TextView
+            android:id="@+id/userprofilelogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Logout"
+            android:textColor="#05750A"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/userprofiletop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Account Settings"
+            android:textColor="#05750A"
+            android:textSize="20dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/lastname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userpfp"
+            android:src="@mipmap/harold"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/firstname"
-            app:layout_constraintVertical_bias="0.289" />
+            app:layout_constraintTop_toBottomOf="@+id/userprofiletop">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
