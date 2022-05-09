@@ -35,23 +35,20 @@ class SignUpViewModel(
 
 
     private var userName: String? = null
-    private
-
-    val isUserName: String?
-        get() = userName
+    private val isUserName: String? get() = userName
 
     private fun setUserName(username: String) {
         this.userName = username
     }
 
     fun signUpUser(
-        firstname: String, lastname: String, username: String,
+        firstname: String, lastname: String, email: String,
         password: String
     ) {
 // can be launched in a separate asynchronous job
         Log.i("Testing", "Inside createUser function")
-        setUserName(username)
-        val checkResult = checkIfUserExists(username)
+        setUserName(email)
+        val checkResult = checkIfUserExists(email)
 
 
         Log.i("Testing", getProfile?.value?.firstname + " <- Inside getProfile function")
@@ -65,7 +62,7 @@ class SignUpViewModel(
                 SignupResult(
                     success = User(
                         firstName = firstname, lastName = lastname,
-                        userId = username, password = password
+                        email = email, password = password
                     )
                 )
 
@@ -76,7 +73,7 @@ class SignUpViewModel(
     }
 
 
-    private fun checkIfUserExists(username: String): Boolean {
+    private fun checkIfUserExists(email: String): Boolean {
         var result = ""
         if (allProfiles.value.isNullOrEmpty()) {
             result = true.toString()
@@ -84,12 +81,12 @@ class SignUpViewModel(
             for (profile in allProfiles.value!!) {
                 Log.i(
                     "Testing",
-                    profile.username + " " + username + " <- Inside checkIfUserExists function for loop"
+                    profile.email + " " + email + " <- Inside checkIfUserExists function for loop"
                 )
-                if (profile.username == username) {
+                if (profile.email == email) {
                     Log.i(
                         "Testing",
-                        profile.username + " " + username + " <- Inside checkIfUserExists function for loop"
+                        profile.email + " " + email + " <- Inside checkIfUserExists function for loop"
                     )
                     result = false.toString()
                     break
@@ -105,33 +102,33 @@ class SignUpViewModel(
     }
 
     fun insert(
-        firstname: String, lastname: String, username: String,
+        firstname: String, lastname: String, email: String,
         password: String
     ) {
         Log.i("Testing", "Inside createProfile function")
 
-        Log.i("Testing", "username: $username")
+        Log.i("Testing", "username: $email")
         viewModelScope.launch {
             val profile = Profile()
             profile.firstname = firstname
             profile.lastname = lastname
-            profile.username = username
+            profile.email = email
             profile.password = password
-            Log.i("Testing", "username: " + profile.username)
+            Log.i("Testing", "username: " + profile.email)
             database.addProfile(profile)
         }
     }
 
     fun signupDataChanged(
-        firstName: String, lastName: String, username: String,
+        firstName: String, lastName: String, email: String,
         password: String, confirmPassword: String
     ) {
         if (!isFirstNameValid(firstName)) {
             _signupForm.value = SignUpFormState(firstNameError = R.string.invalid_firstname)
         } else if (!isLastNameValid(lastName)) {
             _signupForm.value = SignUpFormState(lastNameError = R.string.invalid_lastname)
-        } else if (!isUserNameValid(username)) {
-            _signupForm.value = SignUpFormState(usernameError = R.string.invalid_username)
+        } else if (!isUserNameValid(email)) {
+            _signupForm.value = SignUpFormState(emailError = R.string.invalid_email)
         } else if (!isPasswordValid(password)) {
             _signupForm.value = SignUpFormState(passwordError = R.string.invalid_password)
         } else if (!isConfirmPasswordValid(password, confirmPassword)) {

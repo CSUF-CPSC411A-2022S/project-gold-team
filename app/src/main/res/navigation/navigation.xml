@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_loggedIn_to_createEvent"
             app:destination="@id/createEvent" />
+        <action
+            android:id="@+id/action_loggedIn_to_settings"
+            app:destination="@id/settings" />
     </fragment>
     <fragment
         android:id="@+id/map"
@@ -69,4 +72,13 @@
         android:name="fullerton.lfg.CreateEvent"
         android:label="fragment_create_event"
         tools:layout="@layout/fragment_create_event" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="fullerton.lfg.Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
 </navigation>

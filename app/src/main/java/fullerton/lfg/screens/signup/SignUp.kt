@@ -85,8 +85,8 @@ class SignUp : Fragment() {
             if (signupState.lastNameError != null) {
                 lastName?.error = getString(signupState.lastNameError)
             }
-            if (signupState.usernameError != null) {
-                email?.error = getString(signupState.usernameError)
+            if (signupState.emailError != null) {
+                email?.error = getString(signupState.emailError)
             }
             if (signupState.passwordError != null) {
                 password?.error = getString(signupState.passwordError)
@@ -120,7 +120,7 @@ class SignUp : Fragment() {
                 signUpViewModel.insert(
                     firstname = signupResult.success.firstName,
                     lastname = signupResult.success.lastName,
-                    username = signupResult.success.userId,
+                    email = signupResult.success.email  ,
                     password = signupResult.success.password
                 )
 
