@@ -15,7 +15,7 @@
         tools:context=".screens.login.Login">
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/email"
             android:layout_width="289dp"
             android:layout_height="48dp"
             android:layout_marginTop="80dp"

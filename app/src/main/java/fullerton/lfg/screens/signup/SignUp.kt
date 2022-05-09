@@ -228,12 +228,13 @@ class SignUp : Fragment() {
     private fun updateUiWithUser(model: User?) {
         val welcome = getString(R.string.welcome)
         val displayName = model?.firstName.toString()
+        val email = model?.email.toString()
         //Toast.makeText(
             //requireContext(),
             //"$welcome $displayName",
             //Toast.LENGTH_LONG
         //).show()
-        val action = SignUpDirections.actionSignUpToLoggedIn(displayName)
+        val action = SignUpDirections.actionSignUpToLoggedIn(displayName, email)
         findNavController().navigate(action)
         onDestroyView()
 
