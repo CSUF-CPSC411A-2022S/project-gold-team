@@ -21,8 +21,8 @@ data class Profile(
     var lastname: String = "",
 
     // Non-primary key column. Data type is specified in the property.
-    @ColumnInfo(name = "email")
-    var email: String = "",
+    @ColumnInfo(name = "user_name")
+    var username: String = "",
 
     // Non-primary key column. Data type is specified in the property.
     @ColumnInfo(name = "password")

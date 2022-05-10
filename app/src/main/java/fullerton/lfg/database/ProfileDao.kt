@@ -15,17 +15,17 @@ interface ProfileDao {
     @Update
     suspend fun update(profile: Profile)
 
-    @Query("UPDATE profile_table SET first_name=:firstName WHERE email=:email")
-    suspend fun updateFirstName(email: String, firstName: String)
+    @Query("UPDATE profile_table SET first_name=:firstName WHERE user_name=:username")
+    suspend fun updateFirstName(username: String, firstName: String)
 
-    @Query("UPDATE profile_table SET last_name=:lastName WHERE email=:email")
-    suspend fun updateLastName(email: String, lastName: String)
+    @Query("UPDATE profile_table SET last_name=:lastName WHERE user_name=:username")
+    suspend fun updateLastName(username: String, lastName: String)
 
-    @Query("UPDATE profile_table SET password=:password WHERE email=:email")
-    suspend fun updatePassword(email: String, password: String)
+    @Query("UPDATE profile_table SET password=:password WHERE user_name=:username")
+    suspend fun updatePassword(username: String, password: String)
 
-    @Query("SELECT * FROM profile_table WHERE email = :email")
-    fun getProfile(email: String): LiveData<Profile>
+    @Query("SELECT * FROM profile_table WHERE user_name = :username")
+    fun getProfile(username: String): LiveData<Profile>
 
     // Custom query for retrieving all Intersection entities from a table in the database.
     // Data is stored to a List LiveData. We don't use suspend because LiveData objects

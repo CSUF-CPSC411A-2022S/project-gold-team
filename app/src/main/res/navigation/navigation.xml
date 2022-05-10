@@ -44,7 +44,7 @@
         android:label="logged_in"
         tools:layout="@layout/logged_in">
         <argument
-            android:name="firstname"
+            android:name="loggedin"
             app:argType="string" />
         <action
             android:id="@+id/action_loggedIn_to_map"
@@ -57,7 +57,7 @@
             android:id="@+id/action_loggedIn_to_createEvent"
             app:destination="@id/createEvent" />
         <argument
-            android:name="email"
+            android:name="username"
             app:argType="string" />
         <action
             android:id="@+id/action_loggedIn_to_userProfile"
