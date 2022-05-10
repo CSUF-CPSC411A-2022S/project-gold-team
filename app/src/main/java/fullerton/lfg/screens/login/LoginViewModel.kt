@@ -34,8 +34,6 @@ class LoginViewModel(
                     LoginResult(success = LoggedInUserView(
                         displayName = _userDetail.value?.firstname!!, username))
 
-                    LoginResult(success = LoggedInUserView(displayName = _userDetail.value?.firstname!!))
-
             } else if (result == false) {
                 _loginResult.value = LoginResult(error = R.string.login_failed)
             }
