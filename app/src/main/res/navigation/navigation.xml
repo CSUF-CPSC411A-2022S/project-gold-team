@@ -62,6 +62,9 @@
         <action
             android:id="@+id/action_loggedIn_to_userProfile"
             app:destination="@id/userProfile" />
+        <action
+            android:id="@+id/action_loggedIn_to_logIn"
+            app:destination="@id/logIn" />
     </fragment>
     <fragment
         android:id="@+id/map"

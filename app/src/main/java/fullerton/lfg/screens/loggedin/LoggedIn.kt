@@ -46,7 +46,7 @@ class LoggedIn : Fragment() {
         val greet = binding?.greeting
         val createEvent = binding?.createEvent
         val browseEvent = binding?.browseEvent
-        val myEvents = binding?.myEvents
+        val logOut = binding?.logOut
         val profile = binding?.profile
         val maps = binding?.mapButton
 
@@ -62,9 +62,9 @@ class LoggedIn : Fragment() {
             findNavController().navigate(R.id.action_loggedIn_to_postListFragment)
         }
 
-        myEvents?.setOnClickListener {
+        logOut?.setOnClickListener {
             // Replace action with correct directionhi@hot.com
-            //findNavController().navigate(R.id.action_signUp_to_logIn)
+            findNavController().navigate(R.id.action_loggedIn_to_logIn)
         }
 
         profile?.setOnClickListener {
