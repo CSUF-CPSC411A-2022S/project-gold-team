@@ -51,7 +51,6 @@ class SignUpViewModel(
 // can be launched in a separate asynchronous job
         Log.i("Testing", "Inside createUser function")
         setUserName(username)
-
         if(username.isNotEmpty()) {
             val checkResult = checkIfUserExists(username)
 
@@ -61,7 +60,6 @@ class SignUpViewModel(
 
             if (checkResult == true) {
                 Log.i("Testing", "Inside checkResult == true")
-
                 _signupResult.value =
                     SignupResult(
                         success = User(
@@ -122,7 +120,7 @@ class SignUpViewModel(
             profile.username = username
             profile.password = password
             Log.i("Testing", "username: " + profile.username)
-            database.insert(profile)
+            database.addProfile(profile)
         }
     }
 

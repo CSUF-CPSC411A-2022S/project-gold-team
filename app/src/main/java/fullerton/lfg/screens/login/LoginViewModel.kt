@@ -31,6 +31,9 @@ class LoginViewModel(
             val result = checkIfUserExists(username, password)
             if (result == true) {
                 _loginResult.value =
+                    LoginResult(success = LoggedInUserView(
+                        displayName = _userDetail.value?.firstname!!, username))
+
                     LoginResult(success = LoggedInUserView(displayName = _userDetail.value?.firstname!!))
 
             } else if (result == false) {
@@ -38,7 +41,7 @@ class LoginViewModel(
             }
         }
         else{
-            _loginResult.value = LoginResult(error = R.string.invalid_email)
+            _loginResult.value = LoginResult(error = R.string.invalid_username)
         }
 
 
@@ -90,7 +93,6 @@ class LoginViewModel(
         } else {
             Log.i("Testing", "$username <- Inside username is not blank")
             username.isNotBlank()
-
         }
     }
 

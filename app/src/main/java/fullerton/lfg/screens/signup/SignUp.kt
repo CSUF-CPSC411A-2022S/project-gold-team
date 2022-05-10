@@ -64,7 +64,7 @@ class SignUp : Fragment() {
 
         val firstName = binding?.firstName
         val lastName = binding?.lastName
-        val email = binding?.createEmail
+        val username = binding?.createEmail
         val password = binding?.createPassword
         val confirmPassword = binding?.confirmPassword
         val submit = binding?.submitButton
@@ -83,13 +83,14 @@ class SignUp : Fragment() {
                 firstName?.error = getString(signupState.firstNameError)
             }
             else if (signupState.firstNameError == null) {
-                firstName?.error = signupState.firstNameError?.let { it -> getString(R.string.invalid_firstname) }
+                firstName?.error = signupState.firstNameError?.let {
+                        it -> getString(R.string.invalid_firstname) }
             }
             if (signupState.lastNameError != null) {
                 lastName?.error = getString(signupState.lastNameError)
             }
             if (signupState.usernameError != null) {
-                email?.error = getString(signupState.usernameError)
+                username?.error = getString(signupState.usernameError)
             }
             if (signupState.passwordError != null) {
                 password?.error = getString(signupState.passwordError)
@@ -140,7 +141,7 @@ class SignUp : Fragment() {
             signUpViewModel.signupDataChanged(
                 firstName.text.toString(),
                 lastName?.text.toString(),
-                email?.text.toString(),
+                username?.text.toString(),
                 password?.text.toString(),
                 confirmPassword?.text.toString()
             )
@@ -150,17 +151,17 @@ class SignUp : Fragment() {
             signUpViewModel.signupDataChanged(
                 firstName?.text.toString(),
                 lastName.text.toString(),
-                email?.text.toString(),
+                username?.text.toString(),
                 password?.text.toString(),
                 confirmPassword?.text.toString()
             )
         }
 
-        email?.afterTextChanged {
+        username?.afterTextChanged {
             signUpViewModel.signupDataChanged(
                 firstName?.text.toString(),
                 lastName?.text.toString(),
-                email.text.toString(),
+                username.text.toString(),
                 password?.text.toString(),
                 confirmPassword?.text.toString()
             )
@@ -171,7 +172,7 @@ class SignUp : Fragment() {
                 signUpViewModel.signupDataChanged(
                     firstName?.text.toString(),
                     lastName?.text.toString(),
-                    email?.text.toString(),
+                    username?.text.toString(),
                     password.text.toString(),
                     confirmPassword?.text.toString()
 
@@ -184,7 +185,7 @@ class SignUp : Fragment() {
                 signUpViewModel.signupDataChanged(
                     firstName?.text.toString(),
                     lastName?.text.toString(),
-                    email?.text.toString(),
+                    username?.text.toString(),
                     password?.text.toString(),
                     confirmPassword.text.toString()
 
@@ -198,7 +199,7 @@ class SignUp : Fragment() {
                     signUpViewModel.signUpUser(
                         firstName?.text.toString(),
                         lastName?.text.toString(),
-                        email?.text.toString(),
+                        username?.text.toString(),
                         password?.text.toString()
                     )
             }
@@ -214,7 +215,7 @@ class SignUp : Fragment() {
             signUpViewModel.signUpUser(
                 firstName?.text.toString(),
                 lastName?.text.toString(),
-                email?.text.toString(),
+                username?.text.toString(),
                 password?.text.toString()
             )
 
@@ -231,12 +232,13 @@ class SignUp : Fragment() {
     private fun updateUiWithUser(model: User?) {
         val welcome = getString(R.string.welcome)
         val displayName = model?.firstName.toString()
+        val username = model?.userId.toString()
         //Toast.makeText(
             //requireContext(),
             //"$welcome $displayName",
             //Toast.LENGTH_LONG
         //).show()
-        val action = SignUpDirections.actionSignUpToLoggedIn(displayName)
+        val action = SignUpDirections.actionSignUpToLoggedIn(displayName, username)
         findNavController().navigate(action)
         onDestroyView()
 
