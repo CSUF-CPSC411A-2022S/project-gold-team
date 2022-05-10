@@ -1,8 +1,8 @@
 package fullerton.lfg.data.model
 
 data class User(
-    val email: String,
     val firstName: String,
     val lastName: String,
+    val userId: String,
     val password: String
 )

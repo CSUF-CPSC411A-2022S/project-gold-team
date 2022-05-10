@@ -42,7 +42,6 @@
             android:layout_marginEnd="44dp"
             android:onClick="@{()-> geoCodingViewModel.geoCode(location) }"
             android:text="search"
-            android:backgroundTint="@color/lfgreen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchLocation" />
 
