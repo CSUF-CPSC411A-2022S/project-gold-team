@@ -51,27 +51,31 @@ class SignUpViewModel(
 // can be launched in a separate asynchronous job
         Log.i("Testing", "Inside createUser function")
         setUserName(username)
-        val checkResult = checkIfUserExists(username)
 
+        if(username.isNotEmpty()) {
+            val checkResult = checkIfUserExists(username)
 
-        Log.i("Testing", getProfile?.value?.firstname + " <- Inside getProfile function")
+            Log.i("Testing", getProfile?.value?.firstname + " <- Inside getProfile function")
 
-        Log.i("Testing", "$checkResult<- Inside signUpUser function")
+            Log.i("Testing", "$checkResult<- Inside signUpUser function")
 
-        if (checkResult == true) {
-            Log.i("Testing", "Inside checkResult == true")
+            if (checkResult == true) {
+                Log.i("Testing", "Inside checkResult == true")
 
-            _signupResult.value =
-                SignupResult(
-                    success = User(
-                        firstName = firstname, lastName = lastname,
-                        userId = username, password = password
+                _signupResult.value =
+                    SignupResult(
+                        success = User(
+                            firstName = firstname, lastName = lastname,
+                            userId = username, password = password
+                        )
                     )
-                )
 
-        } else if (checkResult == false) {
-            _signupResult.value = SignupResult(error = R.string.signup_failed)
-            Log.i("Testing", "Inside checkResult == false")
+            } else if (checkResult == false) {
+                _signupResult.value = SignupResult(error = R.string.signup_failed)
+                Log.i("Testing", "Inside checkResult == false")
+            }
+        }else{
+            _signupResult.value = SignupResult(error = R.string.invalid_firstname)
         }
     }
 

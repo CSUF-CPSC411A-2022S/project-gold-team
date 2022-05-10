@@ -77,10 +77,13 @@ class SignUp : Fragment() {
             val signupState = it ?: return@Observer
 
             // disable submit button unless all is valid
-            submit?.isEnabled = signupState.isDataValid
 
+            submit?.isEnabled = signupState.isDataValid
             if (signupState.firstNameError != null) {
                 firstName?.error = getString(signupState.firstNameError)
+            }
+            else if (signupState.firstNameError == null) {
+                firstName?.error = signupState.firstNameError?.let { it -> getString(R.string.invalid_firstname) }
             }
             if (signupState.lastNameError != null) {
                 lastName?.error = getString(signupState.lastNameError)
