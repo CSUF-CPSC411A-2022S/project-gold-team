@@ -13,6 +13,7 @@ import fullerton.lfg.R
 import fullerton.lfg.databinding.EditProfileBinding
 import androidx.navigation.fragment.navArgs
 import fullerton.lfg.database.ProfileDatabase
+import fullerton.lfg.database.ProfileDao
 
 
 class EditProfile : Fragment() {
