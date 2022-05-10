@@ -15,6 +15,15 @@ interface ProfileDao {
     @Update
     suspend fun update(profile: Profile)
 
+    @Query("UPDATE profile_table SET first_name=:firstName WHERE email=:email")
+    suspend fun updateFirstName(email: String, firstName: String)
+
+    @Query("UPDATE profile_table SET last_name=:lastName WHERE email=:email")
+    suspend fun updateLastName(email: String, lastName: String)
+
+    @Query("UPDATE profile_table SET password=:password WHERE email=:email")
+    suspend fun updatePassword(email: String, password: String)
+
     @Query("SELECT * FROM profile_table WHERE email = :email")
     fun getProfile(email: String): LiveData<Profile>
 

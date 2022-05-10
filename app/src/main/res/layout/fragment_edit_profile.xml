@@ -46,37 +46,36 @@
 
         <EditText
             android:id="@+id/editprofilefirstname"
-            android:layout_width="wrap_content"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="60dp"
             android:hint="First Name"
-            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toEndOf="@+id/editfirstnameicon"
             app:layout_constraintTop_toBottomOf="@+id/editprofiletop" />
 
         <EditText
             android:id="@+id/editprofilepassword"
-            android:layout_width="wrap_content"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="36dp"
             android:hint="New Password"
             app:layout_constraintStart_toEndOf="@+id/newpasswordicon"
             app:layout_constraintTop_toBottomOf="@+id/editprofilelastname" />
 
         <EditText
             android:id="@+id/confirmnewpassword"
-            android:layout_width="wrap_content"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="40dp"
             android:hint="Confirm New Password"
             app:layout_constraintStart_toEndOf="@+id/confirmnewpasswordicon"
             app:layout_constraintTop_toBottomOf="@+id/editprofilepassword" />
 
         <EditText
             android:id="@+id/editprofilelastname"
-            android:layout_width="wrap_content"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="36dp"
             android:hint="Last Name"
             app:layout_constraintStart_toEndOf="@+id/editlastnameicon"
             app:layout_constraintTop_toBottomOf="@+id/editprofilefirstname" />
@@ -96,7 +95,7 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="48dp"
             android:src="@drawable/create"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editfirstnameicon" />
@@ -106,7 +105,7 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="48dp"
             android:src="@drawable/lock"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editlastnameicon" />
@@ -116,13 +115,34 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="76dp"
+            android:layout_marginTop="48dp"
             android:src="@drawable/lock"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/newpasswordicon" />
 
+        <Button
+            android:id="@+id/editprofileclear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="88dp"
+            android:layout_marginBottom="244dp"
+            android:backgroundTint="@color/lfgreen"
+            android:text="Clear"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.234"
+            app:layout_constraintStart_toStartOf="parent" />
 
-
+        <Button
+            android:id="@+id/editprofileconfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="244dp"
+            android:backgroundTint="@color/lfgreen"
+            android:text="Confirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
