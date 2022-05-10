@@ -76,6 +76,7 @@ class LoggedIn : Fragment() {
         maps?.setOnClickListener {
             // Replace action with correct direction
             findNavController().navigate(R.id.action_loggedIn_to_map)
+
         }
     }
 

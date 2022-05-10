@@ -18,33 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host) as NavHostFragment
-//        val navController = navHostFragment.navController
+        //val navController = navHostFragment.navController
         //for optional bar on top
         //setupActionBarWithNavController(navController)
     }
-}
-class UserInfo(var name: String, var age: Int, var address: String) {
-
-    private var _name = name
-    private var _age = age
-    private var _address = address
-    private var interests: List<String> = listOf()
-
-    fun getUserName(): String {
-        return _name
-    }
-
-    fun getUserAge(): Int {
-        return _age
-    }
-
-    fun getUserAddress() : String {
-        return _address
-    }
-
-    fun getUserInterests(): List<String> {
-        return interests
-    }
-
 }
 

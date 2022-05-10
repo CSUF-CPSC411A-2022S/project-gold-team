@@ -35,7 +35,10 @@ class SignUpViewModel(
 
 
     private var userName: String? = null
-    private val isUserName: String? get() = userName
+    private
+
+    val isUserName: String?
+        get() = userName
 
     private fun setUserName(username: String) {
         this.userName = username
@@ -50,8 +53,11 @@ class SignUpViewModel(
         setUserName(username)
         if(username.isNotEmpty()) {
             val checkResult = checkIfUserExists(username)
+
             Log.i("Testing", getProfile?.value?.firstname + " <- Inside getProfile function")
+
             Log.i("Testing", "$checkResult<- Inside signUpUser function")
+
             if (checkResult == true) {
                 Log.i("Testing", "Inside checkResult == true")
                 _signupResult.value =
@@ -61,6 +67,7 @@ class SignUpViewModel(
                             userId = username, password = password
                         )
                     )
+
             } else if (checkResult == false) {
                 _signupResult.value = SignupResult(error = R.string.signup_failed)
                 Log.i("Testing", "Inside checkResult == false")

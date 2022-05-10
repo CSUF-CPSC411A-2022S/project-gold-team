@@ -33,6 +33,9 @@ class LoginViewModel(
                 _loginResult.value =
                     LoginResult(success = LoggedInUserView(
                         displayName = _userDetail.value?.firstname!!, username))
+
+                    LoginResult(success = LoggedInUserView(displayName = _userDetail.value?.firstname!!))
+
             } else if (result == false) {
                 _loginResult.value = LoginResult(error = R.string.login_failed)
             }
@@ -40,6 +43,8 @@ class LoginViewModel(
         else{
             _loginResult.value = LoginResult(error = R.string.invalid_username)
         }
+
+
     }
 
     private fun checkIfUserExists(username: String, password: String): Boolean {
@@ -86,6 +91,7 @@ class LoginViewModel(
         return if (username.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
         } else {
+            Log.i("Testing", "$username <- Inside username is not blank")
             username.isNotBlank()
         }
     }
