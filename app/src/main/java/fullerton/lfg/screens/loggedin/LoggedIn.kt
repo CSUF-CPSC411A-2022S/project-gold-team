@@ -41,7 +41,8 @@ class LoggedIn : Fragment() {
             loggedIn = this@LoggedIn
         }
 
-        val loggedin = args.loggedin
+        val firstname = args.firstname
+        val email = args.email
         val greet = binding?.greeting
         val createEvent = binding?.createEvent
         val browseEvent = binding?.browseEvent
@@ -49,7 +50,7 @@ class LoggedIn : Fragment() {
         val profile = binding?.profile
         val maps = binding?.mapButton
 
-        greet?.text = "Welcome $loggedin"
+        greet?.text = "Welcome $firstname"
 
         createEvent?.setOnClickListener {
             // Replace action with correct direction
@@ -68,13 +69,13 @@ class LoggedIn : Fragment() {
 
         profile?.setOnClickListener {
             // Replace action with correct direction
-            //findNavController().navigate(R.id.action_signUp_to_logIn)
+            findNavController().navigate(LoggedInDirections
+                .actionLoggedInToUserProfile(email))
         }
 
         maps?.setOnClickListener {
             // Replace action with correct direction
             findNavController().navigate(R.id.action_loggedIn_to_map)
-
         }
     }
 

@@ -44,7 +44,7 @@ class SignUp : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val application = requireNotNull(this.activity).application
-        val dataSource = ProfileDatabase.getInstance(application).profileDao
+        val dataSource = ProfileDatabase.getInstance(application).profileDao()
 
         val viewModelFactory = SignUpViewModelFactory(dataSource, application)
 
@@ -88,8 +88,8 @@ class SignUp : Fragment() {
             if (signupState.lastNameError != null) {
                 lastName?.error = getString(signupState.lastNameError)
             }
-            if (signupState.usernameError != null) {
-                email?.error = getString(signupState.usernameError)
+            if (signupState.emailError != null) {
+                email?.error = getString(signupState.emailError)
             }
             if (signupState.passwordError != null) {
                 password?.error = getString(signupState.passwordError)
@@ -123,7 +123,7 @@ class SignUp : Fragment() {
                 signUpViewModel.insert(
                     firstname = signupResult.success.firstName,
                     lastname = signupResult.success.lastName,
-                    username = signupResult.success.userId,
+                    email = signupResult.success.email  ,
                     password = signupResult.success.password
                 )
 
@@ -231,12 +231,13 @@ class SignUp : Fragment() {
     private fun updateUiWithUser(model: User?) {
         val welcome = getString(R.string.welcome)
         val displayName = model?.firstName.toString()
+        val email = model?.email.toString()
         //Toast.makeText(
             //requireContext(),
             //"$welcome $displayName",
             //Toast.LENGTH_LONG
         //).show()
-        val action = SignUpDirections.actionSignUpToLoggedIn(displayName)
+        val action = SignUpDirections.actionSignUpToLoggedIn(displayName, email)
         findNavController().navigate(action)
         onDestroyView()
 

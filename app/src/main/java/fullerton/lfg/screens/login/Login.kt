@@ -42,14 +42,14 @@ class Login : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val application = requireNotNull(this.activity).application
-        val dataSource = ProfileDatabase.getInstance(application).profileDao
+        val dataSource = ProfileDatabase.getInstance(application).profileDao()
 
         val viewModelFactory = LoginModelFactory(dataSource, application)
         loginViewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
 
         binding?.logIn = this
 
-        val username = binding?.username
+        val email = binding?.email
         val password = binding?.password
         val login = binding?.loginButton
         val loading = binding?.loading
@@ -61,8 +61,8 @@ class Login : Fragment() {
             // disable login button unless both username / password is valid
             login?.isEnabled = loginState.isDataValid
 
-            if (loginState.usernameError != null) {
-                username?.error = getString(loginState.usernameError)
+            if (loginState.emailError != null) {
+                email?.error = getString(loginState.emailError)
             }
             if (loginState.passwordError != null) {
                 password?.error = getString(loginState.passwordError)
@@ -85,9 +85,9 @@ class Login : Fragment() {
             }
         })
 
-        username?.afterTextChanged {
+        email?.afterTextChanged {
             loginViewModel.loginDataChanged(
-                username?.text.toString(),
+                email?.text.toString(),
                 password?.text.toString()
             )
         }
@@ -95,7 +95,7 @@ class Login : Fragment() {
         password?.apply {
             afterTextChanged {
                 loginViewModel.loginDataChanged(
-                    username?.text.toString(),
+                    email?.text.toString(),
                     password?.text.toString()
                 )
             }
@@ -104,7 +104,7 @@ class Login : Fragment() {
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
                         loginViewModel.login(
-                            username?.text.toString(),
+                            email?.text.toString(),
                             password?.text.toString()
                         )
                 }
@@ -113,7 +113,7 @@ class Login : Fragment() {
             // login button
             login?.setOnClickListener {
                 loading?.visibility = View.VISIBLE
-                loginViewModel.login(username?.text.toString(), password.text.toString())
+                loginViewModel.login(email?.text.toString(), password.text.toString())
                 onDestroyView()
             }
 
@@ -126,12 +126,13 @@ class Login : Fragment() {
     private fun updateUiWithUser(model: LoggedInUserView?) {
         val welcome = getString(R.string.welcome)
         val displayName = model?.displayName
+        val email = model?.email.toString()
         //Toast.makeText(
             //requireContext(),
             //"$welcome $displayName",
             //Toast.LENGTH_LONG
         //).show()
-        val action = LoginDirections.actionLoginToLoggedIn(displayName!!)
+        val action = LoginDirections.actionLoginToLoggedIn(displayName!!, email)
         findNavController().navigate(action)
         onDestroyView()
 

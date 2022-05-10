@@ -25,7 +25,7 @@ class LoginViewModel(
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun login(username: String, password: String) {
+    fun login(email: String, password: String) {
 
         if(username.isNotEmpty() ){
             val result = checkIfUserExists(username, password)
@@ -44,7 +44,7 @@ class LoginViewModel(
 
     }
 
-    private fun checkIfUserExists(username: String, password: String): Boolean {
+    private fun checkIfUserExists(email: String, password: String): Boolean {
         var result = ""
         if (allProfiles.value.isNullOrEmpty()) {
             result = false.toString()
@@ -52,12 +52,12 @@ class LoginViewModel(
             for (profile in allProfiles.value!!) {
                 Log.i(
                     "Testing",
-                    profile.username + " " + username + " <- Inside checkIfUserExists function for loop"
+                    profile.email + " " + email + " <- Inside checkIfUserExists function for loop"
                 )
-                if (profile.username == username && profile.password == password) {
+                if (profile.email == email && profile.password == password) {
                     Log.i(
                         "Testing",
-                        profile.username + " " + username + " <- Inside checkIfUserExists function for loop"
+                        profile.email + " " + email + " <- Inside checkIfUserExists function for loop"
                     )
                     _userDetail.value = profile
                     result = true.toString()
@@ -73,9 +73,9 @@ class LoginViewModel(
         return result.toBoolean()
     }
 
-    fun loginDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
-            _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
+    fun loginDataChanged(email: String, password: String) {
+        if (!isUserNameValid(email)) {
+            _loginForm.value = LoginFormState(emailError = R.string.invalid_email)
         } else if (!isPasswordValid(password)) {
             _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
         } else {
@@ -84,13 +84,11 @@ class LoginViewModel(
     }
 
     // A placeholder username validation check
-    private fun isUserNameValid(username: String): Boolean {
-        return if (username.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
+    private fun isUserNameValid(email: String): Boolean {
+        return if (email.contains('@')) {
+            Patterns.EMAIL_ADDRESS.matcher(email).matches()
         } else {
-            Log.i("Testing", "$username <- Inside username is not blank")
-            username.isNotBlank()
-
+            email.isNotBlank()
         }
     }
 

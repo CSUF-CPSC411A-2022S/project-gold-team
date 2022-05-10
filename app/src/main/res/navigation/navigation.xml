@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
+    android:label="user_profile"
     app:startDestination="@id/logIn">
 
     <fragment
         android:id="@+id/logIn"
         android:name="fullerton.lfg.screens.login.Login"
         android:label="@string/app_name"
-        tools:layout="@layout/login" >
+        tools:layout="@layout/login">
         <action
             android:id="@+id/action_login_to_signUp"
             app:destination="@id/signUp" />
@@ -27,7 +28,7 @@
         android:id="@+id/signUp"
         android:name="fullerton.lfg.screens.signup.SignUp"
         android:label="sign_up"
-        tools:layout="@layout/sign_up" >
+        tools:layout="@layout/sign_up">
         <action
             android:id="@+id/action_signUp_to_loggedIn"
             app:destination="@id/loggedIn" />
@@ -41,8 +42,10 @@
         android:id="@+id/loggedIn"
         android:name="fullerton.lfg.screens.loggedin.LoggedIn"
         android:label="logged_in"
-        tools:layout="@layout/logged_in" >
-        <argument android:name="loggedin" />
+        tools:layout="@layout/logged_in">
+        <argument
+            android:name="firstname"
+            app:argType="string" />
         <action
             android:id="@+id/action_loggedIn_to_map"
             app:destination="@id/map" />
@@ -53,12 +56,18 @@
         <action
             android:id="@+id/action_loggedIn_to_createEvent"
             app:destination="@id/createEvent" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_loggedIn_to_userProfile"
+            app:destination="@id/userProfile" />
     </fragment>
     <fragment
         android:id="@+id/map"
         android:name="fullerton.lfg.MapFragment"
         android:label="map_fragment"
-        tools:layout="@layout/map_fragment"/>
+        tools:layout="@layout/map_fragment" />
 
     <fragment
         android:id="@+id/postListFragment"
@@ -69,4 +78,27 @@
         android:name="fullerton.lfg.CreateEvent"
         android:label="fragment_create_event"
         tools:layout="@layout/fragment_create_event" />
+    <fragment
+        android:id="@+id/userProfile"
+        android:name="fullerton.lfg.screens.userProfile.UserProfile"
+        android:label="user_profile"
+        tools:layout="@layout/user_profile" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_userProfile_to_loggedIn"
+            app:destination="@id/loggedIn" />
+        <action
+            android:id="@+id/action_userProfile_to_logIn"
+            app:destination="@id/logIn" />
+        <action
+            android:id="@+id/action_userProfile_to_editProfile"
+            app:destination="@id/editProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfile"
+        android:name="fullerton.lfg.EditProfile"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>

@@ -2,10 +2,8 @@ package fullerton.lfg.data
 
 import fullerton.lfg.data.model.User
 
-
 class UserInfo {
     companion object {
-
         fun dataSet(): ArrayList<User> {
             val userList = ArrayList<User>()
             userList.add(
@@ -14,10 +12,7 @@ class UserInfo {
                     "Perez",
                     "hi@hot.com",
                     "password123"
-
-
                 )
-
             )
             userList.add(
                 User(
@@ -25,10 +20,7 @@ class UserInfo {
                     "Konechy",
                     "bruh@hotmail.com",
                     "password123"
-
-
                 )
-
             )
             userList.add(
                 User(
@@ -36,10 +28,7 @@ class UserInfo {
                     "Rivas",
                     "sup@hotmail.com",
                     "password123"
-
-
                 )
-
             )
             userList.add(
                 User(
@@ -47,10 +36,7 @@ class UserInfo {
                     "Le",
                     "yo@hotmail.com",
                     "password123"
-
-
                 )
-
             )
             userList.add(
                 User(
@@ -58,9 +44,7 @@ class UserInfo {
                     "Fake",
                     "hi@hotmail.com",
                     "password123"
-
                 )
-
             )
             userList.add(
                 User(
@@ -68,10 +52,7 @@ class UserInfo {
                     "Fake",
                     "wazup@hotmail.com",
                     "password123"
-
-
                 )
-
             )
             userList.add(
                 User(
@@ -80,9 +61,7 @@ class UserInfo {
                     "aloha@hotmail.com",
                     "password123"
                 )
-
             )
-
             return userList
         }
 
