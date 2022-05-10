@@ -27,14 +27,20 @@ class LoginViewModel(
 
     fun login(username: String, password: String) {
 
-        val result = checkIfUserExists(username, password)
+        if(username.isNotEmpty() ){
+            val result = checkIfUserExists(username, password)
+            if (result == true) {
+                _loginResult.value =
+                    LoginResult(success = LoggedInUserView(
+                        displayName = _userDetail.value?.firstname!!, username)
+                    )
 
-        if (result == true) {
-            _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = _userDetail.value?.firstname!!))
-
-        } else if (result == false) {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
+            } else if (result == false) {
+                _loginResult.value = LoginResult(error = R.string.login_failed)
+            }
+        }
+        else{
+            _loginResult.value = LoginResult(error = R.string.invalid_username)
         }
     }
 
