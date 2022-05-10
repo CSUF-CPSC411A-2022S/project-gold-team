@@ -51,9 +51,12 @@ class SignUpViewModel(
         val checkResult = checkIfUserExists(email)
 
 
-        Log.i("Testing", getProfile?.value?.firstname + " <- Inside getProfile function")
+        if(username.isNotEmpty()) {
+            val checkResult = checkIfUserExists(username)
 
-        Log.i("Testing", "$checkResult<- Inside signUpUser function")
+            Log.i("Testing", getProfile?.value?.firstname + " <- Inside getProfile function")
+
+            Log.i("Testing", "$checkResult<- Inside signUpUser function")
 
         if (checkResult) {
             Log.i("Testing", "Inside checkResult == true")
@@ -64,11 +67,13 @@ class SignUpViewModel(
                         firstName = firstname, lastName = lastname,
                         email = email, password = password
                     )
-                )
 
-        } else if (!checkResult) {
-            _signupResult.value = SignupResult(error = R.string.signup_failed)
-            Log.i("Testing", "Inside checkResult == false")
+            } else if (checkResult == false) {
+                _signupResult.value = SignupResult(error = R.string.signup_failed)
+                Log.i("Testing", "Inside checkResult == false")
+            }
+        }else{
+            _signupResult.value = SignupResult(error = R.string.invalid_firstname)
         }
     }
 

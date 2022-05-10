@@ -27,16 +27,21 @@ class LoginViewModel(
 
     fun login(email: String, password: String) {
 
-        val result = checkIfUserExists(email, password)
+        if(username.isNotEmpty() ){
+            val result = checkIfUserExists(username, password)
+            if (result == true) {
+                _loginResult.value =
+                    LoginResult(success = LoggedInUserView(displayName = _userDetail.value?.firstname!!))
 
-        if (result) {
-            _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = _userDetail.value?.firstname!!,
-                    email = _userDetail.value?.email!!))
-
-        } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
+            } else if (result == false) {
+                _loginResult.value = LoginResult(error = R.string.login_failed)
+            }
         }
+        else{
+            _loginResult.value = LoginResult(error = R.string.invalid_email)
+        }
+
+
     }
 
     private fun checkIfUserExists(email: String, password: String): Boolean {

@@ -10,6 +10,7 @@
     <string name="invalid_password">Password must be at least 6 characters</string>
     <string name="invalid_confirm_password">Password does not match</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="invalid_email">"Not a valid email"</string>
     <string name="signup_failed">"This email already exists"</string>
     <string name="invalid_firstname">"Must enter a first name"</string>
     <string name="invalid_lastname">"Must enter a last name"</string>
