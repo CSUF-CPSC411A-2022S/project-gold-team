@@ -11,7 +11,7 @@
         tools:context=".screens.editProfile.EditProfile">
 
         <TextView
-            android:id="@+id/editprofiletop"
+            android:id="@+id/editProfileTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -30,12 +30,12 @@
             android:layout_height="1dp"
             android:background="@color/lfgreen"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editprofileback"
+            app:layout_constraintTop_toBottomOf="@+id/editProfileBackBtn"
             app:layout_constraintVertical_bias="0.0"
             tools:layout_editor_absoluteX="0dp" />
 
         <ImageView
-            android:id="@+id/editprofileback"
+            android:id="@+id/editProfileBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -45,43 +45,43 @@
             app:srcCompat="@drawable/ic_backarrow" />
 
         <EditText
-            android:id="@+id/editprofilefirstname"
+            android:id="@+id/editProfileFirstName"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:hint="First Name"
-            app:layout_constraintStart_toEndOf="@+id/editfirstnameicon"
-            app:layout_constraintTop_toBottomOf="@+id/editprofiletop" />
+            app:layout_constraintStart_toEndOf="@+id/editFNIcon"
+            app:layout_constraintTop_toBottomOf="@+id/editProfileTop" />
 
         <EditText
-            android:id="@+id/editprofilepassword"
+            android:id="@+id/editProfilePassword"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:hint="New Password"
-            app:layout_constraintStart_toEndOf="@+id/newpasswordicon"
-            app:layout_constraintTop_toBottomOf="@+id/editprofilelastname" />
+            app:layout_constraintStart_toEndOf="@+id/newPWIcon"
+            app:layout_constraintTop_toBottomOf="@+id/editProfileLastName" />
 
         <EditText
-            android:id="@+id/confirmnewpassword"
+            android:id="@+id/editConfirmNewPassword"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:hint="Confirm New Password"
-            app:layout_constraintStart_toEndOf="@+id/confirmnewpasswordicon"
-            app:layout_constraintTop_toBottomOf="@+id/editprofilepassword" />
+            app:layout_constraintStart_toEndOf="@+id/confirmNewPWIcon"
+            app:layout_constraintTop_toBottomOf="@+id/editProfilePassword" />
 
         <EditText
-            android:id="@+id/editprofilelastname"
+            android:id="@+id/editProfileLastName"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:hint="Last Name"
-            app:layout_constraintStart_toEndOf="@+id/editlastnameicon"
-            app:layout_constraintTop_toBottomOf="@+id/editprofilefirstname" />
+            app:layout_constraintStart_toEndOf="@+id/editLNIcon"
+            app:layout_constraintTop_toBottomOf="@+id/editProfileFirstName" />
 
         <ImageView
-            android:id="@+id/editfirstnameicon"
+            android:id="@+id/editFNIcon"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginStart="36dp"
@@ -91,37 +91,37 @@
             app:layout_constraintTop_toBottomOf="@+id/bar1" />
 
         <ImageView
-            android:id="@+id/editlastnameicon"
+            android:id="@+id/editLNIcon"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="48dp"
             android:src="@drawable/create"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editfirstnameicon" />
+            app:layout_constraintTop_toBottomOf="@+id/editFNIcon" />
 
         <ImageView
-            android:id="@+id/newpasswordicon"
+            android:id="@+id/newPWIcon"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="48dp"
             android:src="@drawable/lock"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editlastnameicon" />
+            app:layout_constraintTop_toBottomOf="@+id/editLNIcon" />
 
         <ImageView
-            android:id="@+id/confirmnewpasswordicon"
+            android:id="@+id/confirmNewPWIcon"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="48dp"
             android:src="@drawable/lock"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newpasswordicon" />
+            app:layout_constraintTop_toBottomOf="@+id/newPWIcon" />
 
         <Button
-            android:id="@+id/editprofileclear"
+            android:id="@+id/editProfileClearBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="88dp"
@@ -134,7 +134,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/editprofileconfirm"
+            android:id="@+id/editProfileConfirmBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="80dp"

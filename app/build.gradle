@@ -50,6 +50,12 @@ dependencies {
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
 
+    // lifecycleScope:
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha04'
+
+// viewModelScope:
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha04'
+
 
     // Required dependencies for moshi
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"

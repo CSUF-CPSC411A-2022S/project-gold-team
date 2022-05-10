@@ -18,11 +18,10 @@ import androidx.navigation.fragment.findNavController
 import fullerton.lfg.database.Profile
 import fullerton.lfg.database.ProfileDatabase
 
-
 class UserProfile : Fragment() {
 
     private var binding: UserProfileBinding? = null
-    val args: UserProfileArgs by navArgs()
+    private val args: UserProfileArgs by navArgs()
 
     private lateinit var userProfileViewModel: UserProfileViewModel
     private lateinit var userProfileBinding: UserProfileBinding
@@ -34,7 +33,6 @@ class UserProfile : Fragment() {
         // Inflate the layout for this fragment
         userProfileBinding = UserProfileBinding.inflate(inflater, container, false)
         binding = userProfileBinding
-
         return userProfileBinding.root
     }
 
@@ -56,7 +54,6 @@ class UserProfile : Fragment() {
 
         // Args passed
         val userEmail = args.email
-        Log.i("test email", userEmail)
 
         // To pass back to previous fragment
         var firstName = ""
@@ -88,10 +85,11 @@ class UserProfile : Fragment() {
         }
 
         logoutButton?.setOnClickListener {
-            findNavController().navigate(R.id.action_userProfile_to_logIn)
+            findNavController().navigate(R.id.action_userProfile_to_logIn)        }
+
+        editProfileButton?.setOnClickListener{
+            findNavController().navigate(UserProfileDirections
+                .actionUserProfileToEditProfile(userEmail))
         }
-
-        //TODO: Add nav for edit Profile fragment
     }
-
 }

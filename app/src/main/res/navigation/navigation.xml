@@ -98,7 +98,13 @@
     </fragment>
     <fragment
         android:id="@+id/editProfile"
-        android:name="fullerton.lfg.EditProfile"
-        android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        android:name="fullerton.lfg.screens.editProfile.EditProfile"
+        android:label="EditProfile" >
+        <action
+            android:id="@+id/action_editProfile_to_userProfile2"
+            app:destination="@id/userProfile" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </fragment>
 </navigation>
