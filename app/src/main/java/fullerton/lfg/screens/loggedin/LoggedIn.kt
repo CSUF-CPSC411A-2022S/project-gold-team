@@ -69,8 +69,8 @@ class LoggedIn : Fragment() {
 
         profile?.setOnClickListener {
             // Replace action with correct direction
-            findNavController().navigate(LoggedInDirections
-                .actionLoggedInToUserProfile(username))
+            //findNavController().navigate(LoggedInDirections
+                //.actionLoggedInToUserProfile(username))
         }
 
         maps?.setOnClickListener {

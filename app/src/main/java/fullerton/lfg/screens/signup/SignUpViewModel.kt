@@ -120,7 +120,7 @@ class SignUpViewModel(
             profile.username = username
             profile.password = password
             Log.i("Testing", "username: " + profile.username)
-            database.addProfile(profile)
+            database.insert(profile)
         }
     }
 
