@@ -15,7 +15,7 @@ class ProfileDatabaseTest : TestCase() {
     private lateinit var dao: ProfileDao
 
     // default values for test profiles
-    // username should be email
+    // username and email are the same
     private val testUserName= "tester@mail.com"
     private val testFirstName = "Tester"
     private val testLastName = "One"
@@ -35,10 +35,11 @@ class ProfileDatabaseTest : TestCase() {
     }
 
     // helper function to quickly generate test profiles
-    private fun createTestProfile(userName: String = testUserName,
-                                  firstName: String = testFirstName,
-                                  lastName: String = testLastName,
-                                  password: String = testPassword
+    private fun createTestProfile(
+        userName: String = testUserName,
+        firstName: String = testFirstName,
+        lastName: String = testLastName,
+        password: String = testPassword
     ) : Profile {
         val testProfile = Profile()
         testProfile.firstname = firstName
