@@ -1,5 +1,10 @@
 package fullerton.lfg.screens.userProfile
 
+/*
+    Since this viewModel deals exclusively with database transactions,
+    we will forego unit tests as agreed with professor
+ */
+
 import android.app.Application
 import androidx.lifecycle.*
 import fullerton.lfg.database.Profile
