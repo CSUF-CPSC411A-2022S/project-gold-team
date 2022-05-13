@@ -17,7 +17,6 @@ class SignUpViewModelTest : TestCase() {
         val signUpForm = SignUpFormState(
             firstNameError, lastNameError, usernameError, passwordError, confirmPasswordError
         )
-
         assertEquals(R.string.invalid_firstname,signUpForm.firstNameError)
         assertEquals(R.string.invalid_lastname,signUpForm.lastNameError)
         assertEquals(R.string.invalid_username,signUpForm.usernameError)
