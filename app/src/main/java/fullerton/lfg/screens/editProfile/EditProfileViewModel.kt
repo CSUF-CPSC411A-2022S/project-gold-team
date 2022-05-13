@@ -1,5 +1,10 @@
 package fullerton.lfg.screens.editProfile
 
+/*
+    Since this viewModel deals exclusively with database transactions,
+    we will forego unit tests as agreed with professor
+ */
+
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
