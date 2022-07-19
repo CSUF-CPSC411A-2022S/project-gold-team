@@ -1,3 +1,6 @@
+// Zulema Perez
+// CSPC 411
+
 package fullerton.lfg.screens.login
 
 
