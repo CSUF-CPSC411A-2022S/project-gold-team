@@ -1,3 +1,5 @@
+// Zulema Perez
+// CPSC 411
 package fullerton.lfg.screens.login
 
 import android.app.Application
