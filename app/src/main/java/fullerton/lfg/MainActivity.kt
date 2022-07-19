@@ -1,3 +1,6 @@
+// Zulema Perez
+// CPSC 411
+// Created main activity.kt and added the MainActivity class only.
 package fullerton.lfg
 
 import androidx.appcompat.app.AppCompatActivity
