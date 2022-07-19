@@ -1,3 +1,5 @@
+// Zulema Perez
+// CSPC 411
 package fullerton.lfg
 
 import android.os.Bundle
