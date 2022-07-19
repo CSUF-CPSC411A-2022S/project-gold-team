@@ -1,3 +1,5 @@
+// Zulema Perez
+// CSPC 411
 package fullerton.lfg.screens.signup
 
 import fullerton.lfg.data.model.User
