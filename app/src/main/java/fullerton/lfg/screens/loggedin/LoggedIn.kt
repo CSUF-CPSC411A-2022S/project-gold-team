@@ -1,3 +1,7 @@
+// Zulema Perez
+// CPSC 411
+// Created loggedin fragment for group members to connect thier fragments.
+
 package fullerton.lfg.screens.loggedin
 
 
